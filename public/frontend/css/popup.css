@@ -1,0 +1,235 @@
+/* ========================================================== Popup Part============================================= */
+.popup_contact {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+
+    transform: translate(18.75rem, 22rem) scale(0.1);
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.popup_contact_show {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+
+.popup_inner {
+    width: 31.25rem;
+    background-color: #fff;
+    margin: auto;
+    margin-top: 30vh;
+    padding: 2rem 0;
+    box-shadow: 5px 5px 6.25rem 1.5rem var(--contact_color);
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.xmark {
+    font-size: 2rem;
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    color: #000;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.xmark:hover {
+    color: var(--logo_down);
+}
+
+.popup_inner h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #000;
+}
+
+.popup_inner form {
+    background-color: var(--contact_color);
+    text-align: center;
+    color: #fff;
+    width: 80%;
+    margin: auto;
+    border-radius: 1.2rem;
+    padding: 1.2rem 0;
+
+}
+
+.input {
+    width: 18.75rem;
+    height: 3.2rem;
+    margin: auto;
+    position: relative;
+}
+
+.input input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.1rem;
+    padding-top: 1rem;
+    background-color: var(--contact_color);
+    color: #fff;
+}
+
+.input label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid var(--contact_color);
+    overflow: hidden;
+    text-align: left;
+}
+
+.input label::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: -2px;
+    border-bottom: 3px solid var(--logo_up);
+    transform: translateX(-100%);
+    transition: var(--transition);
+
+}
+
+.input label span {
+    position: absolute;
+    left: 0px;
+    bottom: 10px;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.input input:focus+label span,
+.input input:valid+label span {
+    transform: translateY(-100%);
+    font-size: 1rem;
+    color: var(--logo_up);
+}
+
+.input input:focus+label::after,
+.input input:valid+label::after {
+    transform: none;
+}
+
+
+.textarea {
+    position: relative;
+    width: 18.75rem;
+    margin: auto;
+    height: 5rem;
+}
+
+.textarea textarea {
+    max-width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.1rem;
+    padding-top: 1rem;
+    background-color: transparent;
+    color: #fff;
+}
+
+.textarea label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid var(--logo_up);
+    overflow: hidden;
+    text-align: left;
+}
+
+.textarea label span {
+    position: absolute;
+    left: 0px;
+    bottom: 10px;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.textarea label::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid var(--logo_up);
+    transform: translateX(-100%);
+    transition: var(--transition);
+}
+
+.textarea textarea:focus+label span,
+.textarea textarea:valid+label span {
+    transform: translateY(-200%);
+    font-size: 1rem;
+    color: var(--logo_up);
+}
+
+.textarea textarea:focus+label::after,
+.textarea textarea:valid+label::after {
+    transform: none;
+}
+
+input[type="submit"] {
+    background-color: var(--logo_down);
+    color: #fff;
+    padding: 0;
+    margin-top: 5px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #fff;
+    color: var(--logo_down);
+    padding: 0;
+    margin-top: 5px;
+}
+
+
+/*============================================= Device width Lower than 650px ==========================================*/
+@media (max-width:650px) {
+    .xmark {
+        right: 5px;
+        top: 5px;
+    }
+}
+
+
+
+/*============================================= Device width Lower than 600px ==========================================*/
+@media (max-width:600px) {
+    .popup_inner {
+        width: 28.5rem;
+    }
+}
+
+
+/*============================================= Device width Lower than 600px ==========================================*/
+@media (max-width:500px) {
+    .popup_inner {
+        width: auto;
+    }
+
+    .input,
+    .textarea {
+        width: 16rem;
+    }
+}

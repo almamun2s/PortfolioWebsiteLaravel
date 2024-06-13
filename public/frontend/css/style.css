@@ -1,0 +1,468 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Josefin+Sans&family=Ubuntu&display=swap');
+
+* {
+    font-family: 'Itim', cursive;
+}
+
+:root {
+    --logo_up: #00aeef;
+    --logo_down: #ee2d33;
+    --contact_color: #e47175;
+    --contact_border: #7abad1;
+    --transition: all 0.3s ease;
+
+    --ff-ubuntu: 'Ubuntu', sans-serif;
+    --ff-itim: 'Itim', cursive;
+
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--contact_border);
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ee2d3386;
+    border: 1px solid #7abad18e;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--logo_down);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h2 {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+.hide {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.ff-ubuntu {
+    font-family: var(--ff-ubuntu);
+}
+
+
+
+
+
+
+
+
+
+/* ============== Header CSS ============== */
+header {
+    background-image: linear-gradient(to right, #ffe6d9, #fbf3ff);
+}
+
+.logo img {
+    max-width: 10rem;
+    padding: 5px 0;
+}
+
+.main_menu {
+    font-size: 1.1rem;
+    max-width: 10rem;
+    float: right;
+}
+
+.main_menu ul {
+    list-style: none;
+    display: flex;
+    padding-top: 0.5rem;
+}
+
+.main_menu ul li:hover a {
+    color: var(--logo_up);
+}
+
+.main_menu ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 0.5rem 1rem;
+    transition: var(--transition);
+}
+
+.menu_btn {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.menu_btn i {
+    position: inherit;
+}
+
+@media (min-width:768px) {
+    .menu_btn {
+        display: none;
+    }
+}
+
+@media (max-width:768px) {
+    .main_menu ul {
+        flex-direction: column;
+        display: none;
+    }
+}
+
+/* .active {
+    background-color: #ef343a85;
+} */
+.btn-primary {
+    background-color: var(--logo_up);
+    border-color: var(--logo_up);
+}
+
+
+
+
+
+
+
+/* ============== Banner CSS ============== */
+.banner {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 5.75rem 0;
+}
+
+.banner::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+@media (max-width:768px) {
+    .banner {
+        padding: 3.75rem 0;
+        text-align: center;
+    }
+
+    .my-title h2 {
+        font-size: 1.5rem;
+    }
+
+    .my-description {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============== Welcome CSS ============== */
+.welcome {
+    padding: 3.1rem 0;
+}
+
+.wlc_item {
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 3.75rem 0 rgba(169, 232, 255, 0.5);
+    overflow: hidden;
+}
+
+.wlc_icon {
+    float: left;
+    width: 105%;
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(255 255 255);
+    padding: 0.3rem 1rem;
+    margin: 5px;
+    background-image: linear-gradient(to right, #0B43CE, #092b42);
+    border-radius: 50%;
+}
+
+/* .wlc_icon i {
+    box-shadow: -9px 0px 10px 0px rgba(0, 0, 0, 0.3);
+
+} */
+
+@media (max-width:1199px) {
+    .wlc_icon {
+        width: 135%;
+    }
+}
+
+@media (max-width:991px) {
+    .wlc_icon {
+        width: 220%;
+        margin-left: -0.5rem;
+    }
+}
+
+@media (max-width:767px) {
+    .wlc_icon {
+        width: 115%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width:575px) {
+    .wlc_item {
+        text-align: center;
+    }
+
+    .wlc_icon {
+        width: 15%;
+        position: absolute;
+        left: calc(50% - 2.5rem);
+    }
+
+    .wlc_item_inn {
+        margin-top: 4rem;
+    }
+}
+
+/* ============== Service CSS ============== */
+.service {
+    width: 100%;
+    background-image: linear-gradient(to right, #fef2ff, #efd9ff);
+    padding: 2rem 0;
+}
+
+.service_item:hover .service_item_left {
+    background-image: linear-gradient(to left, #ff7c76, #fba977);
+    color: var(--logo_up);
+}
+
+.service_item:hover h3 {
+    color: var(--logo_up);
+}
+
+.service_item a {
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    /* margin: 1%; */
+    display: block;
+    /* padding: 0.5rem; */
+    box-shadow: 0 0 2.5rem 0.5rem rgba(91, 134, 149, 0.393);
+    overflow: hidden;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.service_item_left {
+    float: left;
+    width: 10%;
+    font-size: 1.5rem;
+    background-image: linear-gradient(to right, #ff7c76, #fba977);
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid #fba977;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+    margin: 0.5rem;
+}
+
+.service_item_right {
+    float: right;
+    text-align: left;
+    width: 85%;
+}
+
+.service_item_right h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    transition: var(--transition);
+}
+
+.service_number {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+.special_upper {
+    margin-top: -5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.special_under {
+    font-size: 6.5rem;
+    width: 100%;
+    color: rgba(129, 173, 234, 0.2);
+    letter-spacing: 0.5rem;
+    text-align: center;
+}
+
+
+/* ============== Process CSS ============== */
+.process {
+    padding: 2rem 0;
+}
+
+.process_icon {
+    font-size: 2.75rem;
+    color: #eafaff;
+    border: 1px solid #eb76fe;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    margin: 5px;
+    border-radius: 20%;
+    background-image: linear-gradient(to right, #eb76fe, #c478fa);
+    transition: 0.5s;
+}
+
+.process_item_inner {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2.5rem 0.5rem rgba(91, 134, 149, 0.393);
+    display: inline-block;
+    margin-bottom: 3%;
+    text-align: center;
+    padding: 1rem;
+}
+
+.process_item_inner h2 {
+    color: #000000;
+    padding-bottom: 0.5rem;
+}
+
+.process_item_inner p {
+    font-size: 1.1rem;
+}
+
+
+/* ============== Portfolio CSS ============== */
+.portfolio {
+    background-image: linear-gradient(to left, #fef2ff, #efd9ff);
+    padding: 2rem 0;
+}
+
+.portfolio_inner {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio_inner img {
+    transition: var(--transition);
+    border-radius: 5%;
+}
+
+.portfolio_inner a::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.portfolio_title {
+    position: absolute;
+    top: 40%;
+    padding: 0 0.7rem;
+    z-index: 99;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.portfolio_inner:hover a::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+.portfolio_inner:hover img {
+    transform: scale(1.3);
+    border-radius: 0;
+}
+
+.portfolio_inner:hover .portfolio_title {
+    visibility: visible;
+    opacity: 1;
+}
+
+.portfolio_tab_controller {
+    font-size: 1.1rem;
+    padding: 0.1rem 1rem;
+}
+
+.portfolio_tab_controller.active {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+/* ============== Footer CSS ============== */
+.footer_top {
+    background-image: linear-gradient(to right, rgb(84, 19, 171), rgb(121, 77, 178));
+    padding: 2.2rem 0;
+}
+
+#contact_btn {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    background-image: linear-gradient(to right, #ff7d73, #fbaa75);
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    width: 12.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* ============== Animation Duration CSS ============== */
+.animation_dur-5{
+    animation-duration: 500ms !important;
+}
+.animation_dur1{
+    animation-duration: 1000ms !important;
+}
+.animation_dur1-5{
+    animation-duration: 1500ms !important;
+}
+.animation_dur2{
+    animation-duration: 2000ms !important;
+}
+
+.progress-bar {
+    width: 0;
+    transition: width 2s;
+}
