@@ -89,76 +89,28 @@
                     <h2 class="special_upper wow animate__animated animate__fadeInLeft">{{ $data->service_title }}</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3 service_item">
-                        <a href="#">
-                            <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="service_item_right">
-                                <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">PSD
-                                    to HTML</h3>
-                                <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">I will convert custom
-                                    design to HTML5</h5>
-                            </div>
-                            <div class="service_number">1</div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 mb-3 service_item">
-                        <a href="#">
-                            <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="service_item_right">
-                                <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">PSD
-                                    to HTML</h3>
-                                <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">I will convert custom
-                                    design to HTML5</h5>
-                            </div>
-                            <div class="service_number">1</div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 mb-3 service_item">
-                        <a href="#">
-                            <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="service_item_right">
-                                <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">PSD
-                                    to HTML</h3>
-                                <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">I will convert custom
-                                    design to HTML5</h5>
-                            </div>
-                            <div class="service_number">1</div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 mb-3 service_item">
-                        <a href="#">
-                            <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="service_item_right">
-                                <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">PSD
-                                    to HTML</h3>
-                                <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">I will convert custom
-                                    design to HTML5</h5>
-                            </div>
-                            <div class="service_number">1</div>
-                        </a>
-                    </div>
-                    <div class="col-md-6 mb-3 service_item">
-                        <a href="#">
-                            <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
-                                <i class="fab fa-html5"></i>
-                            </div>
-                            <div class="service_item_right">
-                                <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">PSD
-                                    to HTML</h3>
-                                <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">I will convert custom
-                                    design to HTML5</h5>
-                            </div>
-                            <div class="service_number">1</div>
-                        </a>
-                    </div>
+                    @php
+                        $services = App\Models\Service::where('is_public', 1)->latest()->limit($data->service_count)->get();
+                    @endphp
+                    @foreach ($services as $key => $service)
+                        <div class="col-md-6 mb-3 service_item">
+                            <a href="#">
+                                <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
+                                    <i class="{{ $service->icon }}"></i>
+                                </div>
+                                <div class="service_item_right">
+                                    <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">
+                                        {{ $service->title }}</h3>
+                                    <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $service->sub_title }}</h5>
+                                </div>
+                                <div class="service_number">{{ $key + 1 }}</div>
+                            </a>
+                        </div>
+                    @endforeach
+
+
+
+
 
 
                 </div>

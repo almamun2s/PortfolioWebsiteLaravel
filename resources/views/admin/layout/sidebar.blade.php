@@ -45,6 +45,13 @@
         </div>
     </li>
 
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ url('dashboard/services') }}">
+            <i class="fas fa-server"></i>
+            <span>Services</span></a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#portfolio"
             aria-expanded="true" aria-controls="portfolio">

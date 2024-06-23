@@ -30,7 +30,7 @@
             <div class="row position-relative">
                 <div class="col-md-2">
                     <div class="logo">
-                        <a href="#" target="_blank">
+                        <a href="{{ route('home') }}" target="_blank">
                             <img src="{{ asset('uploads/frontImg/logo.png') }}" alt="Abdullah Almamun">
                         </a>
                     </div>

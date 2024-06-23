@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Backend\HomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\ServiceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -38,4 +39,6 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
         Route::put('/portfolio', 'portfolio_update')->name('portfolio');
 
     });
+
+    Route::resource('/services', ServiceController::class);
 });

@@ -21,6 +21,11 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <!-- CSS for DataTables -->
+    <link rel="stylesheet" href="{{ asset('packages/datatables/dataTables.bootstrap4.min.css') }}">
+
+
+
 </head>
 
 <body id="page-top">
@@ -36,7 +41,7 @@
             <div id="content">
 
                 @include('admin.layout.topbar')
-                
+
                 @yield('content')
 
             </div>
@@ -101,6 +106,18 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+
+    <!-- JS for DataTables -->
+    <script src="{{ asset('packages/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('packages/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- JS for tinymce -->
+    <script src="https://cdn.tiny.cloud/1/rmjgw8lpaxz7g36aqrox2jv5ec5evkqhhnpdwukg393ekqk2/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <!-- JS for Sweetalart -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('admin/js/script.js') }}"></script>
 
 </body>
 
