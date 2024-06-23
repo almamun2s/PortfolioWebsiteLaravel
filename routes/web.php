@@ -21,6 +21,21 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::get('/home/banner', [HomeController::class, 'banner'])->name('home.banner');
-    Route::put('/home/banner', [HomeController::class, 'banner_update'])->name('home.banner');
+    Route::prefix('/home')->name('home.')->controller(HomeController::class)->group(function () {
+        Route::get('/banner', 'banner')->name('banner');
+        Route::put('/banner', 'banner_update')->name('banner');
+
+        Route::get('/welcome', 'welcome')->name('welcome');
+        Route::put('/welcome', 'welcome_update')->name('welcome');
+
+        Route::get('/service', 'service')->name('service');
+        Route::put('/service', 'service_update')->name('service');
+
+        Route::get('/process', 'process')->name('process');
+        Route::put('/process', 'process_update')->name('process');
+
+        Route::get('/portfolio', 'portfolio')->name('portfolio');
+        Route::put('/portfolio', 'portfolio_update')->name('portfolio');
+
+    });
 });

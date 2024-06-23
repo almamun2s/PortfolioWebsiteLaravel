@@ -15,16 +15,16 @@ return new class extends Migration {
             $table->string('hi', 20)->nullable();
             $table->string('name', 25)->nullable();
             $table->string('title', 50)->nullable();
-            $table->string('description', 255)->nullable();
+            $table->string('description')->nullable();
 
-            $table->string('welcome_title', 25)->nullable();
+            $table->string('welcome_title', 50)->nullable();
             $table->text('welcome_description')->nullable();
-            $table->string('quality_icon', 20)->nullable();
-            $table->string('quality_text', 50)->nullable();
-            $table->string('performance_icon', 20)->nullable();
-            $table->string('performance_text', 50)->nullable();
-            $table->string('support_icon', 20)->nullable();
-            $table->string('support_text', 50)->nullable();
+            $table->string('quality_icon', 50)->nullable();
+            $table->string('quality_text')->nullable();
+            $table->string('performance_icon', 50)->nullable();
+            $table->string('performance_text')->nullable();
+            $table->string('support_icon', 50)->nullable();
+            $table->string('support_text')->nullable();
 
             $table->boolean('service_show')->default(true)->nullable();
             $table->string('service_title')->nullable();

@@ -37,10 +37,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Home page:</h6>
                 <a class="collapse-item" href="{{ route('admin.home.banner') }}">Banner</a>
-                <a class="collapse-item" href="cards.html">Welcome</a>
-                <a class="collapse-item" href="cards.html">Service</a>
-                <a class="collapse-item" href="cards.html">Process</a>
-                <a class="collapse-item" href="cards.html">Portfolio</a>
+                <a class="collapse-item" href="{{ route('admin.home.welcome') }}">Welcome</a>
+                <a class="collapse-item" href="{{ route('admin.home.service') }}">Service</a>
+                <a class="collapse-item" href="{{ route('admin.home.process') }}">Process</a>
+                <a class="collapse-item" href="{{ route('admin.home.portfolio') }}">Portfolio</a>
             </div>
         </div>
     </li>
