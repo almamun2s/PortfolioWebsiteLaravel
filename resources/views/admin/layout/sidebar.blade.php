@@ -14,22 +14,13 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-
-
-
-
-
-
-
-
 
 
     <!-- Heading -->
@@ -45,7 +36,7 @@
         <div id="home" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Home page:</h6>
-                <a class="collapse-item" href="buttons.html">Banner</a>
+                <a class="collapse-item" href="{{ route('admin.home.banner') }}">Banner</a>
                 <a class="collapse-item" href="cards.html">Welcome</a>
                 <a class="collapse-item" href="cards.html">Service</a>
                 <a class="collapse-item" href="cards.html">Process</a>

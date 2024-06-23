@@ -10,10 +10,9 @@
         <div class="container">
             <div class="row text-white">
                 <div class="col-md-6 my-title">
-                    <h2 class="wow animate__animated animate__fadeInUp anim animation_dur-5">Hi, I'm</h2>
-                    <h1 class="font-weight-bold wow animate__animated animate__fadeInUp animation_dur1">Abdullah Almamun
-                    </h1>
-                    <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Full Stack Web Developer</h2>
+                    <h2 class="wow animate__animated animate__fadeInUp anim animation_dur-5">{{ $data->hi }}</h2>
+                    <h1 class="font-weight-bold wow animate__animated animate__fadeInUp animation_dur1">{{ $data->name }}</h1>
+                    <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $data->title }}</h2>
                 </div>
                 <div class="col-md-6 my-description">
                     <p class="h4 wow animate__animated animate__fadeInUp animation_dur2">Web Design
