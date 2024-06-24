@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ServiceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/service/{id}', [ServiceController::class, 'details'])->name('service');
 
 
 Route::middleware('auth')->group(function () {

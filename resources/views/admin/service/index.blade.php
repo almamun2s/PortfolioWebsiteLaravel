@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><i class="{{ $service->icon }}"></i></td>
-                                    <td>{{ $service->title }}</td>
+                                    <td><a href="{{ route('service', $service->id) }}">{{ $service->title }}</a></td>
                                     <td>{{ $service->sub_title }}</td>
                                     <td>
                                         @if ($service->is_public)
@@ -58,7 +58,8 @@
                                     </td>
                                     <td>
                                         <a href="#" class="btn btn-secondary">View</a>
-                                        <a href="{{ url("dashboard/services/$service->id/edit") }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ url("dashboard/services/$service->id/edit") }}"
+                                            class="btn btn-warning">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

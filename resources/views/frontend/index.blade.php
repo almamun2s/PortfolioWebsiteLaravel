@@ -90,18 +90,22 @@
                 </div>
                 <div class="row">
                     @php
-                        $services = App\Models\Service::where('is_public', 1)->latest()->limit($data->service_count)->get();
+                        $services = App\Models\Service::where('is_public', 1)
+                            ->latest()
+                            ->limit($data->service_count)
+                            ->get();
                     @endphp
                     @foreach ($services as $key => $service)
                         <div class="col-md-6 mb-3 service_item">
-                            <a href="#">
+                            <a href="{{ route('service', $service->id) }}">
                                 <div class="service_item_left wow animate__animated animate__fadeInLeft animation_dur1-5">
                                     <i class="{{ $service->icon }}"></i>
                                 </div>
                                 <div class="service_item_right">
                                     <h3 class="font-weight-bold wow animate__animated animate__fadeInDown animation_dur1-5">
                                         {{ $service->title }}</h3>
-                                    <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $service->sub_title }}</h5>
+                                    <h5 class="wow animate__animated animate__fadeInUp animation_dur1-5">
+                                        {{ $service->sub_title }}</h5>
                                 </div>
                                 <div class="service_number">{{ $key + 1 }}</div>
                             </a>

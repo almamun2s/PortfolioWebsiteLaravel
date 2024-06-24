@@ -57,8 +57,7 @@ class ServiceController extends Controller
      */
     public function show(string $id)
     {
-        dd('show');
-
+        abort(404);
     }
 
     /**
@@ -106,5 +105,19 @@ class ServiceController extends Controller
 
         toastr()->error('Service Deleted.');
         return redirect('dashboard/services');
+    }
+
+    /**
+     * Showing Service details page to frontend
+     *
+     * @param integer $id
+     */
+    public function details(int $id)
+    {
+        $service = Service::findOrFail($id);
+        if (!$service->is_public) {
+            abort(404);
+        }
+        return view('admin.service.show', compact('service'));
     }
 }
