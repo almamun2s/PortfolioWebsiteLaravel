@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
+use App\Models\Process;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -118,7 +119,8 @@ class HomeController extends Controller
      */
     public function process()
     {
-        return view('admin.home.process', ['data' => $this->homeData]);
+        $processes = Process::orderBy('serial', 'ASC')->get();
+        return view('admin.home.process', ['data' => $this->homeData, 'processes' => $processes]);
     }
 
     /**

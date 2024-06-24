@@ -131,102 +131,20 @@
                     <h2 class="special_upper wow animate__animated animate__fadeInRight">{{ $data->process_title }}</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInTopLeft animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
+                    @php
+                        $processes = App\Models\Process::orderBy('serial', 'ASC')->get();
+                    @endphp
+                    @foreach ($processes as $process)
+                        <div class="col-md-4 process_item">
+                            <div class="process_item_inner">
+                                <div class="process_icon wow animate__animated animate__fadeInTopLeft animation_dur1">
+                                    <i class="{{ $process->icon }}"></i>
+                                </div>
+                                <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $process->name }}</h2>
+                                <p class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $process->description }}</p>
                             </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
                         </div>
-                    </div>
-
-
-
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInDown animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
-                            </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInTopRight animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
-                            </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInBottomLeft animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
-                            </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInUp animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
-                            </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 process_item">
-                        <div class="process_item_inner">
-                            <div class="process_icon wow animate__animated animate__fadeInBottomRight animation_dur1">
-                                <i class="fa-regular fa-comment"></i>
-                            </div>
-                            <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">Conversation</h2>
-                            <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
-                                First, I make a conversation with my clients. It is very important for me. Because, it is
-                                nedded
-                                to understand the project requirements of them. Sometimes, I make audio or video call to
-                                communicate with clients faster
-                            </p>
-                        </div>
-                    </div>
-
+                    @endforeach
 
 
                 </div>
@@ -245,8 +163,8 @@
                 <!-- Navigation Menu -->
                 <ul class="nav nav-tabs mb-3 bb-0" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active portfolio_tab_controller" id="home-tab" data-toggle="tab"
-                            href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active portfolio_tab_controller" id="home-tab" data-toggle="tab" href="#home"
+                            role="tab" aria-controls="home" aria-selected="true">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link portfolio_tab_controller" id="profile-tab" data-toggle="tab" href="#profile"

@@ -31,7 +31,8 @@
                             <div class="row mb-2">
                                 <div class="col-md-4">Process title:</div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="process_title" value="{{ $data->process_title }}" autocomplete="off">
+                                    <input type="text" class="form-control" name="process_title"
+                                        value="{{ $data->process_title }}" autocomplete="off">
                                 </div>
                             </div>
 
@@ -46,6 +47,55 @@
                         </form>
 
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Process DataTables
+                    <a href="{{ route('admin.home.processes.create') }}" class="float-right btn btn-primary">Add Process</a>
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Icon</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>SL</th>
+                                <th>Icon</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach ($processes as $key => $process)
+                                <tr>
+                                    <td>{{ $process->serial }}</td>
+                                    <td><i class="{{ $process->icon }}"></i></td>
+                                    <td>{{ $process->name }}</td>
+                                    <td>{{ $process->description }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.home.processes.edit', $process) }}"
+                                            class="btn btn-warning">Edit</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

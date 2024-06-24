@@ -22,7 +22,6 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        // dd('create');
         return view('admin.service.create');
     }
 
@@ -47,14 +46,14 @@ class ServiceController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        toastr()->success('Service added Successfully.');
+        toastr()->success('Service Created Successfully.');
         return redirect('dashboard/services');
     }
 
     /**
      * Display the specified Service.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         abort(404);
     }
@@ -62,7 +61,7 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified Service.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
         $service = Service::findOrFail($id);
         return view('admin.service.edit', compact('service'));
@@ -71,7 +70,7 @@ class ServiceController extends Controller
     /**
      * Update the specified Service in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $service = Service::findOrFail($id);
         $request->validate([
@@ -97,7 +96,7 @@ class ServiceController extends Controller
     /**
      * Remove the specified Service from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         $service = Service::findOrFail($id);
         $service->delete();

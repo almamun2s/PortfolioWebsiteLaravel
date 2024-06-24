@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\ProcessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\HomeController;
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
 
         Route::get('/process', 'process')->name('process');
         Route::put('/process', 'process_update')->name('process');
+        Route::resource('/processes', ProcessController::class);
 
         Route::get('/portfolio', 'portfolio')->name('portfolio');
         Route::put('/portfolio', 'portfolio_update')->name('portfolio');

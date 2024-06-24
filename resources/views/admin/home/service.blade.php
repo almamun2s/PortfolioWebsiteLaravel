@@ -59,10 +59,12 @@
         </div>
 
 
-        <!-- DataTales Example -->
+        <!-- Service DataTales -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Service DataTables
+                    <a href="{{ route('admin.home.services.create') }}" class="float-right btn btn-primary">Add Service</a>
+                </h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
