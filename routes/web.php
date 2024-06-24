@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProcessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -43,5 +44,7 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
         Route::put('/portfolio', 'portfolio_update')->name('portfolio');
 
     });
+
+    Route::resource('/categories', CategoryController::class);
 
 });

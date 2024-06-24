@@ -94,6 +94,16 @@
         </div>
     </li>
 
+    <!-- Nav Item - Category -->
+    <li class="nav-item 
+        @if (request()->routeIs('admin.categories.index') ||
+                request()->routeIs('admin.categories.create') ||
+                request()->routeIs('admin.categories.edit')) active @endif
+    ">
+        <a class="nav-link" href="{{ route('admin.categories.index') }}">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Category</span></a>
+    </li>
 
 
     <!-- Divider -->

@@ -1,5 +1,5 @@
 @extends('admin.layout.layout_auth')
-@section('title', 'Add Service')
+@section('title', 'Add Process')
 
 @section('content')
     <!-- Begin Page Content -->
@@ -7,14 +7,14 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Add Service</h1>
+            <h1 class="h3 mb-0 text-gray-800">Add Process</h1>
         </div>
 
         <div class="row">
             <div class="col-md-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add Service</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Add Process</h6>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.home.processes.store') }}" method="post">
