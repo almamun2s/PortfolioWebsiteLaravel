@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -27,9 +27,15 @@
     <div class="sidebar-heading">Pages</div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#home"
-            aria-expanded="true" aria-controls="home">
+    <li class="nav-item
+        @if (request()->routeIs('admin.home.banner') ||
+                request()->routeIs('admin.home.welcome') ||
+                request()->routeIs('admin.home.service') ||
+                request()->routeIs('admin.home.process') ||
+                request()->routeIs('admin.home.portfolio')) {{ 'active' }} @endif
+    ">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#home" aria-expanded="true"
+            aria-controls="home">
             <i class="fas fa-house"></i>
             <span>Home</span>
         </a>
@@ -43,13 +49,6 @@
                 <a class="collapse-item" href="{{ route('admin.home.portfolio') }}">Portfolio</a>
             </div>
         </div>
-    </li>
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ url('dashboard/services') }}">
-            <i class="fas fa-server"></i>
-            <span>Services</span></a>
     </li>
 
     <li class="nav-item">
@@ -68,8 +67,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about"
-            aria-expanded="true" aria-controls="about">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about" aria-expanded="true"
+            aria-controls="about">
             <i class="fas fa-address-card"></i>
             <span>About</span>
         </a>
@@ -82,8 +81,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contact"
-            aria-expanded="true" aria-controls="contact">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contact" aria-expanded="true"
+            aria-controls="contact">
             <i class="fas fa-address-book"></i>
             <span>Contact</span>
         </a>
@@ -104,7 +103,6 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
 
 
 </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -90,7 +91,8 @@ class HomeController extends Controller
      */
     public function service()
     {
-        return view('admin.home.service', ['data' => $this->homeData]);
+        $services = Service::latest()->get();
+        return view('admin.home.service', ['data' => $this->homeData, 'services' => $services]);
     }
 
     /**

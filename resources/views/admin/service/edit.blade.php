@@ -17,7 +17,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Service</h6>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url("dashboard/services/$service->id") }}" method="post">
+                        <form action="{{ route('admin.home.services.update', $service ) }}" method="post">
                             @csrf
                             @method('PUT')
 
@@ -77,7 +77,7 @@
                             </div>
                         </form>
 
-                        <form action="{{ url("dashboard/services/$service->id") }}" method="post" id="deleteForm">
+                        <form action="{{ route('admin.home.services.destroy', $service ) }}" method="post" id="deleteForm">
                             @csrf
                             @method('DELETE')
                             <div class="row mt-4">

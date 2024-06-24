@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
 
         Route::get('/service', 'service')->name('service');
         Route::put('/service', 'service_update')->name('service');
+        Route::resource('/services', ServiceController::class);
 
         Route::get('/process', 'process')->name('process');
         Route::put('/process', 'process_update')->name('process');
@@ -41,5 +42,4 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
 
     });
 
-    Route::resource('/services', ServiceController::class);
 });

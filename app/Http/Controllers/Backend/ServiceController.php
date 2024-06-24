@@ -14,8 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::latest()->get();
-        return view('admin.service.index', compact('services'));
+        return redirect()->route('admin.home.service');
     }
 
     /**
@@ -92,7 +91,7 @@ class ServiceController extends Controller
 
 
         toastr()->success('Service Updated Successfully.');
-        return redirect('dashboard/services');
+        return redirect()->route('admin.home.service');
     }
 
     /**
@@ -104,7 +103,7 @@ class ServiceController extends Controller
         $service->delete();
 
         toastr()->error('Service Deleted.');
-        return redirect('dashboard/services');
+        return redirect()->route('admin.home.service');
     }
 
     /**
