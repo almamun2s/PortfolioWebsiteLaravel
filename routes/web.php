@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PortfolioController;
 use App\Http\Controllers\Backend\ProcessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -46,5 +47,7 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
     });
 
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/portfolios', PortfolioController::class);
+    Route::get('/get_categories', [CategoryController::class, 'get_categories'])->name('get_categories');
 
 });

@@ -115,4 +115,13 @@ class CategoryController extends Controller
         }
         return $slug;
     }
+
+    public function get_categories()
+    {
+        header('Content-Type: application/json');
+
+        $categories = Category::latest()->get();
+
+        return json_encode($categories);
+    }
 }

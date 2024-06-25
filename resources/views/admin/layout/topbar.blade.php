@@ -106,7 +106,7 @@
                 <!-- Counter - Messages -->
                 <span class="badge badge-danger badge-counter">7</span>
             </a>
-            <!-- Dropdown - Messages -->
+            {{-- <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
@@ -160,7 +160,7 @@
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More
                     Messages</a>
-            </div>
+            </div> --}}
         </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>

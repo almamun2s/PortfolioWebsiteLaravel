@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}" target="_blank">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-a"></i>
         </div>
@@ -51,19 +51,15 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#portfolio"
-            aria-expanded="true" aria-controls="portfolio">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item
+            @if (request()->routeIs('admin.portfolios.index') ||
+                    request()->routeIs('admin.portfolios.create') ||
+                    request()->routeIs('admin.portfolios.edit')) active @endif
+    ">
+        <a class="nav-link" href="{{ route('admin.portfolios.index') }}">
             <i class="fas fa-briefcase"></i>
-            <span>Portfolio</span>
-        </a>
-        <div id="portfolio" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Portfolio page:</h6>
-                <a class="collapse-item" href="buttons.html">Portfolio</a>
-                <a class="collapse-item" href="buttons.html">Portfolio Details</a>
-            </div>
-        </div>
+            <span>Portfolio</span></a>
     </li>
 
     <li class="nav-item">

@@ -24,7 +24,11 @@
     <!-- CSS for DataTables -->
     <link rel="stylesheet" href="{{ asset('packages/datatables/dataTables.bootstrap4.min.css') }}">
 
+    <!-- Tags input css -->
+    <link rel="stylesheet" href="{{ asset('packages/tagsinput/bootstrap-tagsinput.css') }}">
 
+    <!-- jQuery -->
+    <script src="{{ asset('packages/jquery/jquery.js') }}"></script>
 
 </head>
 
@@ -91,7 +95,6 @@
     </div>
 
     <!-- JavaScript-->
-    <script src="{{ asset('packages/jquery/jquery.js') }}"></script>
     <script src="{{ asset('packages/bootstrap4/bootstrap.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -117,7 +120,45 @@
     <!-- JS for Sweetalart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Tags input JS -->
+    <script src="{{ asset('packages/tagsinput/bootstrap-tagsinput.js') }}"></script>
+    <script src="{{ asset('packages/tagsinput/bootstrap-tagsinput-angular.js') }}"></script>
+    <script src="{{ asset('packages/tagsinput/typehead.min.js') }}"></script>
+
     <script src="{{ asset('admin/js/script.js') }}"></script>
+
+
+    <!-- Tags input JS -->
+    <script>
+        let elt = $('#categories');
+
+        if (elt) {
+            let categoriesEndpoint = "{{ route('admin.get_categories') }}";
+            var categories = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: categoriesEndpoint,
+                    cache: false,
+                    transform: function(response) {
+                        // Debug: Log the response
+                        console.log('Prefetch response:', response);
+                        return response;
+                    }
+                }
+            });
+            categories.initialize();
+            elt.tagsinput({
+                itemValue: 'id',
+                itemText: 'name',
+                typeaheadjs: {
+                    name: 'categories',
+                    displayKey: 'name',
+                    source: categories.ttAdapter()
+                }
+            });
+        }
+    </script>
 
 </body>
 
