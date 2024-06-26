@@ -43,6 +43,12 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-2">
+                                <div class="col-md-4">Show on home page:</div>
+                                <div class="col-md-8">
+                                    <input type="checkbox" {{ $category->is_public ? 'checked' : '' }} name="publish" style="cursor: pointer;">
+                                </div>
+                            </div>
 
                             <div class="row mb-2">
                                 <div class="col-md-4"></div>

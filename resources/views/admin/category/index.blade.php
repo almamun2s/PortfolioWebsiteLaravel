@@ -24,7 +24,8 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
-                                <th>slug</th>
+                                <th>Slug</th>
+                                <th>Show on home</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,16 +33,24 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
-                                <th>slug</th>
+                                <th>Slug</th>
+                                <th>Show on home</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($categories as $key => $category)
                                 <tr>
-                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
+                                    <td>
+                                        @if ($category->is_public)
+                                            <span class="btn btn-success">Yes</span>
+                                        @else
+                                            <span class="btn btn-danger">No</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.categories.edit', $category) }}"
                                             class="btn btn-warning">Edit</a>

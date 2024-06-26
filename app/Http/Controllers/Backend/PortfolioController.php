@@ -79,6 +79,7 @@ class PortfolioController extends Controller
             'details' => $request->details,
             'tags' => $request->tags,
             'image' => $fileName,
+            'is_public' => (bool) $request->publish,
             'created_at' => Carbon::now(),
         ]);
 
@@ -93,33 +94,106 @@ class PortfolioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        abort(404);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+        return view('admin.portfolio.edit', compact('portfolio'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+        $otherPortfolio = Portfolio::where('id', '!=', $id)->get();
+
+        $request->validate([
+            'title' => 'required|min:5',
+            'details' => 'required|min:10',
+            'tags' => 'required',
+            'categories' => 'required',
+            'image' => 'image|mimes:png,jpg,jpeg,gif,webp|max:1024',
+        ], [
+            'title.required' => 'Please write a title.',
+            'title.min' => 'Title should be minimum 5 charactors.',
+            'details.required' => 'Please provide Portfolio Description.',
+            'details.min' => 'Description should be minimum 10 charactors.',
+            'tags.required' => 'Please provide at least 1 tag.',
+            'categories.required' => 'Portfolio should have at least 1 category.',
+        ]);
+        foreach ($otherPortfolio as $other) {
+            if ($other->slug == $request->slug) {
+                return redirect()->back()->withErrors(['slug' => 'That slug is taken']);
+            }
+        }
+        // Saving data to DB
+        $portfolio->title = $request->title;
+        $portfolio->slug = $request->slug;
+        $portfolio->details = $request->details;
+        $portfolio->tags = $request->tags;
+        $portfolio->is_public = (bool) $request->publish;
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+
+            // Renaming the file
+            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+            if (!file_exists(public_path('uploads/portfolios'))) {
+                mkdir(public_path('uploads/portfolios'));
+            }
+            // Uploading the file to upload directory
+            $file->move('uploads', $fileName);
+
+            // Resize the image and move
+            $imageManager = new ImageManager(Driver::class);
+            $image = $imageManager->read("uploads/$fileName");
+            $image->resize(1140, 760);
+            $image->save(public_path('uploads/portfolios/') . $fileName);
+
+            // Deleting image from upload directory
+            unlink(public_path('uploads/' . $fileName));
+            // Deleting Previous image if exists
+            if (($portfolio->image != null) && (file_exists(public_path('uploads/portfolios/' . $portfolio->image)))) {
+                unlink(public_path('uploads/portfolios/' . $portfolio->image));
+            }
+
+            // Saving image name to DB
+            $portfolio->image = $fileName;
+        }
+
+
+        $categories = explode(',', $request->categories);
+        $categories = array_map('intval', $categories);
+        $portfolio->categories()->sync($categories);
+        $portfolio->save();
+
+        toastr()->success('Portfolio Updated Successfully.');
+        return redirect()->route('admin.portfolios.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+        // Deleting Previous image if exists
+        if (($portfolio->image != null) && (file_exists(public_path('uploads/portfolios/' . $portfolio->image)))) {
+            unlink(public_path('uploads/portfolios/' . $portfolio->image));
+        }
+        $portfolio->delete();
+
+        toastr()->info('Portfolio Deleted.');
+        return redirect()->route('admin.portfolios.index');
     }
 
     /**

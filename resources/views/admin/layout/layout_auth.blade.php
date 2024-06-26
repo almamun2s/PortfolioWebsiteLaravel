@@ -141,8 +141,6 @@
                     url: categoriesEndpoint,
                     cache: false,
                     transform: function(response) {
-                        // Debug: Log the response
-                        console.log('Prefetch response:', response);
                         return response;
                     }
                 }

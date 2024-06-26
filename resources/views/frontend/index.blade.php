@@ -140,8 +140,10 @@
                                 <div class="process_icon wow animate__animated animate__fadeInTopLeft animation_dur1">
                                     <i class="{{ $process->icon }}"></i>
                                 </div>
-                                <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $process->name }}</h2>
-                                <p class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $process->description }}</p>
+                                <h2 class="wow animate__animated animate__fadeInUp animation_dur1-5">{{ $process->name }}
+                                </h2>
+                                <p class="wow animate__animated animate__fadeInUp animation_dur1-5">
+                                    {{ $process->description }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -163,113 +165,64 @@
                 <!-- Navigation Menu -->
                 <ul class="nav nav-tabs mb-3 bb-0" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active portfolio_tab_controller" id="home-tab" data-toggle="tab" href="#home"
-                            role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active portfolio_tab_controller" id="all-tab" data-toggle="tab" href="#all"
+                            role="tab" aria-controls="all" aria-selected="true">All</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link portfolio_tab_controller" id="profile-tab" data-toggle="tab" href="#profile"
-                            role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link portfolio_tab_controller" id="contact-tab" data-toggle="tab" href="#contact"
-                            role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                    </li>
+
+                    @php
+                        $categories = App\Models\Category::where('is_public', 1)->latest()->get();
+                    @endphp
+                    @foreach ($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link portfolio_tab_controller" id="{{ $category->name }}-tab" data-toggle="tab"
+                                href="#{{ $category->name }}" role="tab" aria-controls="{{ $category->name }}"
+                                aria-selected="false">{{ $category->name }}</a>
+                        </li>
+                    @endforeach
+
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-
+                    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         <div class="row wow animate__animated animate__fadeInUp animation_dur1-5">
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">This is title of the portfolio</h5>
-                                    </a>
+                            @php
+                                $portfolios = App\Models\Portfolio::where('is_public', 1)
+                                    ->latest()
+                                    ->limit($data->portfolio_count)
+                                    ->get();
+                            @endphp
+                            @foreach ($portfolios as $portfolio)
+                                <div class="col-md-3 mb-2">
+                                    <div class="portfolio_inner">
+                                        <a href="#">
+                                            <img src="{{ $portfolio->getImg() }}" alt="{{ $portfolio->title }}">
+                                            <h5 class="portfolio_title text-white">{{ $portfolio->title }}</h5>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">This is Bigger one. Lorem ipsum dolor sit
-                                            amet.</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">This is Bigger one. Lorem ipsum dolor sit
-                                            amet.</h5>
-                                    </a>
-                                </div>
-                            </div>
+                            @endforeach
+                        </div>
+                    </div>
 
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">Lorem ipsum dolor sit, amet consectetur
-                                            adipisicing
-                                            elit. Cupiditate, nulla...</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">Lorem ipsum dolor sit, amet consectetur
-                                            adipisicing
-                                            elit. Cupiditate, nulla...</h5>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">This is Bigger one. Lorem ipsum dolor sit
-                                            amet.</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">Lorem ipsum dolor sit, amet consectetur
-                                            adipisicing
-                                            elit. Cupiditate, nulla...</h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <div class="portfolio_inner">
-                                    <a href="#">
-                                        <img src="./asset/img/portfolio2.jpg" alt="Portfolio">
-                                        <h5 class="portfolio_title text-white">Lorem ipsum dolor sit, amet consectetur
-                                            adipisicing
-                                            elit. Cupiditate, nulla...</h5>
-                                    </a>
-                                </div>
+                    @foreach ($categories as $category)
+                        <div class="tab-pane fade" id="{{ $category->name }}" role="tabpanel"
+                            aria-labelledby="{{ $category->name }}-tab">
+                            <div class="row wow animate__animated animate__fadeInUp animation_dur1-5">
+                                @foreach ($category->portfolios as $key => $portfolio)
+                                    @if ($key < $data->portfolio_count && $portfolio->is_public == true)
+                                        <div class="col-md-3 mb-2">
+                                            <div class="portfolio_inner">
+                                                <a href="#">
+                                                    <img src="{{ $portfolio->getImg() }}" alt="{{ $portfolio->title }}">
+                                                    <h5 class="portfolio_title text-white">{{ $portfolio->title }}</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
+                    @endforeach
 
-
-
-
-
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <p>This is the Profile tab content.</p>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <p>This is the Contact tab content.</p>
-                    </div>
                 </div>
 
 

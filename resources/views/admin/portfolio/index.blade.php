@@ -28,6 +28,7 @@
                                 <th>Views</th>
                                 <th>Categories</th>
                                 <th>Tags</th>
+                                <th>Uploaded</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -40,6 +41,7 @@
                                 <th>Views</th>
                                 <th>Categories</th>
                                 <th>Tags</th>
+                                <th>Uploaded</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -55,7 +57,8 @@
                                     <td>{{ $portfolio->views }}</td>
                                     <td>
                                         @foreach ($portfolio->categories as $category)
-                                            <span class="btn btn-info rounded-pill btn-sm">{{ $category->name }}</span>
+                                            <a class="btn btn-info rounded-pill btn-sm"
+                                                href="#">{{ $category->name }}</a>
                                         @endforeach
                                     </td>
                                     <td>
@@ -63,9 +66,10 @@
                                             $tags = explode(',', $portfolio->tags);
                                         @endphp
                                         @foreach ($tags as $tag)
-                                            <span class="btn btn-primary rounded-pill btn-sm">{{ $tag }}</span>
+                                            <span class="btn btn-primary rounded-pill btn-sm disabled">{{ $tag }}</span>
                                         @endforeach
                                     </td>
+                                    <td>{{ $portfolio->created_at->diffForHumans() }}</td>
                                     <td>
                                         @if ($portfolio->is_public)
                                             <span class="btn btn-success">Published</span>

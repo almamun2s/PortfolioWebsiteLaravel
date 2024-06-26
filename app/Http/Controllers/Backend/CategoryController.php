@@ -40,6 +40,7 @@ class CategoryController extends Controller
         Category::insert([
             'name' => $request->name,
             'slug' => $slug,
+            'is_public' => (bool) $request->publish,
         ]);
 
         toastr()->success('Category created Successfully.');
@@ -80,6 +81,7 @@ class CategoryController extends Controller
         }
         $category->name = $request->name;
         $category->slug = $request->slug;
+        $category->is_public = (bool) $request->publish;
 
         $category->save();
 
@@ -95,7 +97,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        toastr()->error('Category Deleted.');
+        toastr()->info('Category Deleted.');
         return redirect()->route('admin.categories.index');
     }
 

@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <div class="col-md-4">Publish:</div>
+                                <div class="col-md-4">Serial:</div>
                                 <div class="col-md-8">
                                     <input type="number" class="form-control" name="serial"
                                         value="{{ $process->serial }}">
