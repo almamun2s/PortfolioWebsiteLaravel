@@ -23,25 +23,56 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
+                                <th>Image</th>
                                 <th>Name</th>
-                                <th>slug</th>
+                                <th>Views</th>
+                                <th>Categories</th>
+                                <th>Tags</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>SL</th>
+                                <th>Image</th>
                                 <th>Name</th>
-                                <th>slug</th>
+                                <th>Views</th>
+                                <th>Categories</th>
+                                <th>Tags</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($portfolios as $key => $portfolio)
                                 <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $portfolio->name }}</td>
-                                    <td>{{ $portfolio->slug }}</td>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <img src="{{ $portfolio->getImg() }}" height="100px" width="150px">
+                                    </td>
+                                    <td><a href="#">{{ $portfolio->title }}</a></td>
+                                    <td>{{ $portfolio->views }}</td>
+                                    <td>
+                                        @foreach ($portfolio->categories as $category)
+                                            <span class="btn btn-info rounded-pill btn-sm">{{ $category->name }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @php
+                                            $tags = explode(',', $portfolio->tags);
+                                        @endphp
+                                        @foreach ($tags as $tag)
+                                            <span class="btn btn-primary rounded-pill btn-sm">{{ $tag }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @if ($portfolio->is_public)
+                                            <span class="btn btn-success">Published</span>
+                                        @else
+                                            <span class="btn btn-danger">Archived</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.portfolios.edit', $portfolio) }}"
                                             class="btn btn-warning">Edit</a>

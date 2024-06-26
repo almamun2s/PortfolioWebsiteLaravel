@@ -47,6 +47,9 @@
                                 <div class="col-md-4">Image:</div>
                                 <div class="col-md-8">
                                     <input type="file" class="form-control" name="image" id="image">
+                                    @error('image')
+                                        <p class="text-danger" style="font-size: 0.8rem;">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-8 my-4">

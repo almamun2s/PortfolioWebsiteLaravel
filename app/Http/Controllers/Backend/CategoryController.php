@@ -110,12 +110,15 @@ class CategoryController extends Controller
         $slug = Str::slug($text);
         $i = 1;
         while (Category::where('slug', $slug)->exists()) {
-            $slug = $slug . '-' . $i;
+            $slug = $slug . $i;
             $i++;
         }
         return $slug;
     }
 
+    /**
+     * This function is for getting all categories by json format
+     */
     public function get_categories()
     {
         header('Content-Type: application/json');

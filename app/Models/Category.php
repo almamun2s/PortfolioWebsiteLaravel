@@ -9,6 +9,10 @@ class Category extends Model
 {
     use HasFactory;
     
-    protected $guard = [];
+    protected $guarded = [];
+
+    public function portfolios(){
+        return $this->belongsToMany(Portfolio::class);
+    }
 
 }

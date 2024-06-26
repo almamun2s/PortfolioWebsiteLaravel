@@ -9,5 +9,5 @@ class Home extends Model
 {
     use HasFactory;
 
-    protected $guard = [];
+    protected $guarded = [];
 }
