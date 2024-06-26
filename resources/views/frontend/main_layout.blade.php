@@ -40,10 +40,10 @@
                     <div class="main_menu">
                         <ul class="mb-0 justify-content-end">
                             <li class="active">
-                                <a href="./index.html">Home</a>
+                                <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="./portfolio.html">Portfolio</a>
+                                <a href="{{ route('portfolio') }}">Portfolio</a>
                             </li>
                             <li>
                                 <a href="./about.html">About</a>

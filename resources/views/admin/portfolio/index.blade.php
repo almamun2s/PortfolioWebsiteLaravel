@@ -53,12 +53,14 @@
                                     <td>
                                         <img src="{{ $portfolio->getImg() }}" height="100px" width="150px">
                                     </td>
-                                    <td><a href="#">{{ $portfolio->title }}</a></td>
+                                    <td><a
+                                            href="{{ route('single_portfolio', $portfolio->slug) }}">{{ $portfolio->title }}</a>
+                                    </td>
                                     <td>{{ $portfolio->views }}</td>
                                     <td>
                                         @foreach ($portfolio->categories as $category)
                                             <a class="btn btn-info rounded-pill btn-sm"
-                                                href="#">{{ $category->name }}</a>
+                                                href="{{ route('portfolio_category', $category->slug) }}">{{ $category->name }}</a>
                                         @endforeach
                                     </td>
                                     <td>
@@ -66,7 +68,8 @@
                                             $tags = explode(',', $portfolio->tags);
                                         @endphp
                                         @foreach ($tags as $tag)
-                                            <span class="btn btn-primary rounded-pill btn-sm disabled">{{ $tag }}</span>
+                                            <span
+                                                class="btn btn-primary rounded-pill btn-sm disabled">{{ $tag }}</span>
                                         @endforeach
                                     </td>
                                     <td>{{ $portfolio->created_at->diffForHumans() }}</td>

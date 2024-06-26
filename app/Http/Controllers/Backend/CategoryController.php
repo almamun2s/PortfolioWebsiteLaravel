@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Home;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -128,5 +129,17 @@ class CategoryController extends Controller
         $categories = Category::latest()->get();
 
         return json_encode($categories);
+    }
+
+    public function category_portfolio(string $slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $data = Home::find(1);
+
+        $pageTitle = 'Category';
+        $portfolioTitle = $category->name;
+        $portfolios = $category->portfolios()->paginate($data->portfolio_count);
+
+        return view('frontend.portfolio', compact(['portfolios', 'portfolioTitle', 'pageTitle']));
     }
 }

@@ -10,7 +10,9 @@ use App\Http\Controllers\Backend\ServiceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/service/{id}', [ServiceController::class, 'details'])->name('service');
-
+Route::get('/portfolios', [PortfolioController::class, 'portfolios'])->name('portfolio');
+Route::get('/portfolios/{slug}', [PortfolioController::class, 'single_portfolio'])->name('single_portfolio');
+Route::get('/portfolios/category/{slug}', [CategoryController::class, 'category_portfolio'])->name('portfolio_category');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

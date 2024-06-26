@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
+use App\Models\Home;
 use App\Models\Category;
 use App\Models\Portfolio;
 use Illuminate\Support\Str;
@@ -211,5 +212,32 @@ class PortfolioController extends Controller
             $i++;
         }
         return $slug;
+    }
+
+
+    /**
+     * This method is for showing portfolios in frontend
+     */
+    public function portfolios()
+    {
+        $data = Home::find(1);
+        $portfolioTitle = $data->portfolio_title;
+        $pageTitle = 'Portfolio';
+
+        $portfolios = Portfolio::where('is_public', 1)->latest()->paginate($data->portfolio_count);
+
+        return view('frontend.portfolio', compact(['portfolios', 'portfolioTitle', 'pageTitle']));
+    }
+
+    /**
+     * This methor is for showing Single Portfolio page 
+     *
+     * @param string $slug
+     */
+    public function single_portfolio(string $slug)
+    {
+        $portfolio = Portfolio::where('slug', $slug)->where('is_public', 1)->firstOrFail();
+
+        return view('frontend.portfolio_details', compact('portfolio'));
     }
 }
