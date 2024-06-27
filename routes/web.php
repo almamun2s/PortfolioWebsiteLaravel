@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PortfolioController;
 use App\Http\Controllers\Backend\ProcessController;
+use App\Http\Controllers\Backend\SocialLinksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\HomeController;
@@ -14,6 +16,8 @@ Route::get('/service/{id}', [ServiceController::class, 'details'])->name('servic
 Route::get('/portfolios', [PortfolioController::class, 'portfolios'])->name('portfolio');
 Route::get('/portfolios/{slug}', [PortfolioController::class, 'single_portfolio'])->name('single_portfolio');
 Route::get('/portfolios/category/{slug}', [CategoryController::class, 'category_portfolio'])->name('portfolio_category');
+Route::get('/about', [AboutController::class, 'show_front' ])->name('about');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,5 +54,9 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
     Route::resource('/categories', CategoryController::class);
     Route::resource('/portfolios', PortfolioController::class);
     Route::get('/get_categories', [CategoryController::class, 'get_categories'])->name('get_categories');
+
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+    Route::post('/about/page', [AboutController::class, 'about_page_update' ])->name('about_page_update');
+    Route::resource('/about/socials', SocialLinksController::class);
 
 });

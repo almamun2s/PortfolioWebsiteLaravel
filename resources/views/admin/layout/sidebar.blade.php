@@ -62,7 +62,7 @@
             <span>Portfolio</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->routeIs('admin.about.index') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about" aria-expanded="true"
             aria-controls="about">
             <i class="fas fa-address-card"></i>
@@ -71,7 +71,9 @@
         <div id="about" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">About page:</h6>
-                <a class="collapse-item" href="buttons.html">About</a>
+                <a class="collapse-item" href="{{ route('admin.about.index') }}">About Page</a>
+                <a class="collapse-item" href="{{ route('admin.about.index') }}">My Status</a>
+                <a class="collapse-item" href="{{ route('admin.socials.index') }}">Social Links</a>
             </div>
         </div>
     </li>

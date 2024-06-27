@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <!-- jQuery JS -->
     <script src="{{ asset('packages/jquery/jquery.js') }}"></script>
+    <style>
+        .active a {
+            color: var(--logo_up) !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,14 +44,14 @@
                     <!-- Header Menu -->
                     <div class="main_menu">
                         <ul class="mb-0 justify-content-end">
-                            <li class="active">
-                                <a href="{{ route('home') }}">Home</a>
+                            <li class="{{ request()->routeIs('home') ? 'active' : '' }}">
+                                <a href="{{ route('home') }}" style="">Home</a>
                             </li>
-                            <li>
+                            <li class="{{ request()->routeIs('portfolio') ? 'active' : '' }}">
                                 <a href="{{ route('portfolio') }}">Portfolio</a>
                             </li>
-                            <li>
-                                <a href="./about.html">About</a>
+                            <li class="{{ request()->routeIs('about') ? 'active' : '' }}">
+                                <a href="{{ route('about') }}">About</a>
                             </li>
                             <li>
                                 <a href="#" class="btn btn-primary fw-bolder ff-ubuntu text-white reach_btn">Reach
