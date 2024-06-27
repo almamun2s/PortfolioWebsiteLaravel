@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\Drivers\Gd\Driver;
 
 class PortfolioController extends Controller
@@ -224,7 +225,7 @@ class PortfolioController extends Controller
         $portfolioTitle = $data->portfolio_title;
         $pageTitle = 'Portfolio';
 
-        $portfolios = Portfolio::where('is_public', 1)->latest()->paginate($data->portfolio_count);
+        $portfolios = Portfolio::where('is_public', 1)->latest()->paginate($data->portfolio_count * 2);
 
         return view('frontend.portfolio', compact(['portfolios', 'portfolioTitle', 'pageTitle']));
     }
@@ -237,6 +238,12 @@ class PortfolioController extends Controller
     public function single_portfolio(string $slug)
     {
         $portfolio = Portfolio::where('slug', $slug)->where('is_public', 1)->firstOrFail();
+
+        $sessionKey = 'portfolio_' . $portfolio->id;
+        if (!Session::has($sessionKey)) {
+            $portfolio->increment('views');
+            Session::put($sessionKey, 1);
+        }
 
         return view('frontend.portfolio_details', compact('portfolio'));
     }

@@ -25,6 +25,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Portfolios</th>
                                 <th>Show on home</th>
                                 <th>Action</th>
                             </tr>
@@ -34,6 +35,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Portfolios</th>
                                 <th>Show on home</th>
                                 <th>Action</th>
                             </tr>
@@ -44,6 +46,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
+                                    <td>{{ $category->portfolios->count() }}</td>
                                     <td>
                                         @if ($category->is_public)
                                             <span class="btn btn-success">Yes</span>

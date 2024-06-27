@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Portfolio</h1>
+            <h1 class="h3 mb-0 text-gray-800">Portfolio <span class="btn btn-primary rounded-pill disabled">{{ $portfolios->count() }}</span></h1>
         </div>
 
         <!-- DataTales Example -->

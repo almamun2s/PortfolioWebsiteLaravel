@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PortfolioController;
 use App\Http\Controllers\Backend\ProcessController;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,7 @@ require __DIR__ . '/auth.php';
 
 // ======================================= Routes for Admin Users =======================================
 Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('/home')->name('home.')->controller(HomeController::class)->group(function () {
         Route::get('/banner', 'banner')->name('banner');

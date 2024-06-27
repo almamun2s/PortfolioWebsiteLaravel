@@ -14,7 +14,8 @@
             <div class="col-md-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold">Update <a href="#">{{ $portfolio->title }}</a>
+                        <h6 class="m-0 font-weight-bold">Update <a
+                                href="{{ route('single_portfolio', $portfolio->slug) }}">{{ $portfolio->title }}</a>
                         </h6>
                     </div>
                     <div class="card-body">
@@ -144,12 +145,10 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="{{ route('admin.portfolios.destroy', $portfolio) }}" method="post"
-                            id="deleteForm">
+                        <form action="{{ route('admin.portfolios.destroy', $portfolio) }}" method="post" id="deleteForm">
                             @csrf
                             @method('DELETE')
                             <div class="row mt-4">
-                                <div class="col-md-4"></div>
                                 <div class="col-md-8">
                                     <input type="submit" class="btn btn-danger" id="delete" value="Delete">
                                 </div>

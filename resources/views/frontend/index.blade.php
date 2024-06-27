@@ -193,7 +193,7 @@
                             @foreach ($portfolios as $portfolio)
                                 <div class="col-md-3 mb-2">
                                     <div class="portfolio_inner">
-                                        <a href="#">
+                                        <a href="{{ route('single_portfolio', $portfolio->slug) }}">
                                             <img src="{{ $portfolio->getImg() }}" alt="{{ $portfolio->title }}">
                                             <h5 class="portfolio_title text-white">{{ $portfolio->title }}</h5>
                                         </a>
