@@ -72,7 +72,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">About page:</h6>
                 <a class="collapse-item" href="{{ route('admin.about.index') }}">About Page</a>
-                <a class="collapse-item" href="{{ route('admin.about.index') }}">My Status</a>
+                <a class="collapse-item" href="{{ route('admin.status.index') }}">My Status</a>
                 <a class="collapse-item" href="{{ route('admin.socials.index') }}">Social Links</a>
             </div>
         </div>

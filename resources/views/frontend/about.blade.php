@@ -42,28 +42,16 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h6 class="d-flex align-items-center mb-3">Work Status</h6>
-                            <p class="mb-0">Laravel</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">WordPress Theme Development</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">WordPress Plugin Development</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Elementor Element Development</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="95" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-
-
+                            @foreach ($statuses as $status)
+                                @if (App\Enum\Status::WORK->value == $status->position)
+                                    <p class="mb-0">{{ $status->name }}</p>
+                                    <div class="progress mb-3 wow animate__animated" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            aria-valuenow="{{ $status->curr_value }}" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -77,38 +65,16 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h6 class="d-flex align-items-center mb-3">Basic Status</h6>
-                            <p class="mb-0">HTML</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="95" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">CSS</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Bootstrap</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">TailWind</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">WordPress Customization</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">PSD to HTML</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-
+                            @foreach ($statuses as $status)
+                                @if (App\Enum\Status::BASIC->value == $status->position)
+                                    <p class="mb-0">{{ $status->name }}</p>
+                                    <div class="progress mb-3 wow animate__animated" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            aria-valuenow="{{ $status->curr_value }}" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -116,42 +82,16 @@
                     <div class="card h-100">
                         <div class="card-body ">
                             <h6 class="d-flex align-items-center mb-3">Programming Status</h6>
-                            <p class="mb-0">JavaScript</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="70"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">jQuery</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="75"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Ajax</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">PHP</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">MySQL</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">C Programming</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="70"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Python</p>
-                            <div class="progress mb-3 wow animate__animated" style="height: 5px">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="60"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
+                            @foreach ($statuses as $status)
+                                @if (App\Enum\Status::PROGRAMMING->value == $status->position)
+                                    <p class="mb-0">{{ $status->name }}</p>
+                                    <div class="progress mb-3 wow animate__animated" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                            aria-valuenow="{{ $status->curr_value }}" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>

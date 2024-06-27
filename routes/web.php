@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Backend\AboutController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\PortfolioController;
-use App\Http\Controllers\Backend\ProcessController;
-use App\Http\Controllers\Backend\SocialLinksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\StatusController;
+use App\Http\Controllers\Backend\ProcessController;
 use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\PortfolioController;
+use App\Http\Controllers\Backend\SocialLinksController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/service/{id}', [ServiceController::class, 'details'])->name('service');
@@ -58,5 +59,6 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::post('/about/page', [AboutController::class, 'about_page_update' ])->name('about_page_update');
     Route::resource('/about/socials', SocialLinksController::class);
+    Route::resource('/about/status', StatusController::class);
 
 });

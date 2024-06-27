@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
+use App\Models\Status;
 use App\Models\SocialLinks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,9 @@ class AboutController extends Controller
     {
         $data = Home::find(1);
         $socials = SocialLinks::get();
-        return view('frontend.about', compact(['data', 'socials']));
+        $statuses = Status::get();
+
+        return view('frontend.about', compact(['data', 'socials', 'statuses']));
     }
 
     /**
