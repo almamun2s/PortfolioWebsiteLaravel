@@ -101,7 +101,7 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->delete();
 
-        toastr()->error('Service Deleted.');
+        toastr()->info('Service Deleted.');
         return redirect()->route('admin.home.service');
     }
 

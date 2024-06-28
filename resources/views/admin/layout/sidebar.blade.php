@@ -93,6 +93,7 @@
             <span>Contact</span></a>
     </li>
 
+    <div class="sidebar-heading">Categories</div>
     <!-- Nav Item - Category -->
     <li class="nav-item 
         @if (request()->routeIs('admin.categories.index') ||
@@ -102,6 +103,30 @@
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
             <i class="fa-solid fa-layer-group"></i>
             <span>Category</span></a>
+    </li>
+
+    <div class="sidebar-heading">Settings</div>
+    <!-- Nav Item - User -->
+    <li class="nav-item 
+    @if (request()->routeIs('admin.users.index') || request()->routeIs('admin.users.edit')) active @endif">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
+            <i class="fas fa-user"></i>
+            <span>Users</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roles" aria-expanded="true"
+            aria-controls="roles">
+            <i class="fas fa-key"></i>
+            <span>Role</span>
+        </a>
+        <div id="roles" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.roles.index') }}">Roles</a>
+                <a class="collapse-item" href="{{ route('admin.permissions.index') }}">Permissions</a>
+            </div>
+        </div>
     </li>
 
 
