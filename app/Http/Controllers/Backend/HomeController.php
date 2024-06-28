@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
+use App\Models\User;
+use App\Models\Contact;
 use App\Models\Process;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\ContactNotification;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -162,5 +166,23 @@ class HomeController extends Controller
 
         toastr()->success('Portfolio Section Updated Successfully.');
         return redirect()->back();
+    }
+
+    public function contact(Request $request)
+    {
+        $data = [
+            'name' => filter_var($request->name, FILTER_SANITIZE_STRING),
+            'email' => filter_var($request->email, FILTER_SANITIZE_EMAIL),
+            'message' => filter_var($request->message, FILTER_SANITIZE_STRING),
+        ];
+
+        $contact = Contact::create($data);
+
+        $user = User::find(1);
+        $notifyMessage = [
+            'message' => "A message from $request->name ",
+            'contact_id' => $contact->id,
+        ];
+        Notification::send($user, new ContactNotification($notifyMessage));
     }
 }

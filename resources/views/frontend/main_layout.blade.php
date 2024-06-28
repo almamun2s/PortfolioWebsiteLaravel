@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('uploads/frontImg/favicon.png') }}" type="image/x-icon">
     <!-- Bootstrap CSS -->
@@ -54,9 +55,8 @@
                                 <a href="{{ route('about') }}">About</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-primary fw-bolder ff-ubuntu text-white reach_btn">Reach
-                                    out
-                                    me</a>
+                                <span class="btn btn-primary fw-bolder ff-ubuntu text-white reach_btn">Reach out
+                                    me</span>
                             </li>
                         </ul>
                     </div>
@@ -93,14 +93,19 @@
             </div>
         </div>
     </section>
-
+    <style>
+        .hideIt {
+            display: none;
+        }
+    </style>
     <div class="popup_contact" id="popup_contact">
         <div class="popup_inner" id="popup_inner">
             <div class="xmark" id="xmark">
                 <i class="fas fa-xmark"></i>
             </div>
             <h2>Contact Form</h2>
-            <form action="" class="contact_form">
+            <form action="" class="contact_form" id="contact_form">
+                @csrf
                 <div class="input mb-3">
                     <input type="text" name="name" id="name" autocomplete="off" required="">
                     <label for="name"><span>Name</span></label>
@@ -113,8 +118,14 @@
                     <textarea name="message" id="message" cols="30" rows="3" required=""></textarea>
                     <label for="message"><span>Message</span></label>
                 </div>
-                <div class="input">
-                    <input type="submit" value="Send">
+                <div class="input mt-3" id="submitBtn">
+                    <input type="submit" value="Send" id="formSubmitBtn">
+                </div>
+                <div class="h3 hideIt" id="sendingSms">
+                    <p>Sending...</p>
+                </div>
+                <div class="h4 hideIt" id="thanksSms">
+                    <p>Thank you for contacting me.</p>
                 </div>
             </form>
 
@@ -139,6 +150,53 @@
     <script src="{{ asset('packages/wow/wow.js') }}"></script>
     <!-- Custom JS -->
     <script src="{{ asset('frontend/js/script.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            let contactForm = $('#contact_form')[0];
+            let formBtn = $('#formSubmitBtn');
+            let submitBtn = $('#submitBtn');
+            let sending = $('#sendingSms');
+            let thanks = $('#thanksSms');
+            formBtn.click(function(event) {
+                event.preventDefault();
+
+                submitBtn.addClass('hideIt');
+                sending.removeClass('hideIt');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('contact') }}',
+                    data: {
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        message: $('#message').val(),
+                    },
+                    success: function(data) {
+                        setTimeout(function() {
+                            sending.addClass('hideIt');
+                            thanks.removeClass('hideIt');
+                            contactForm.reset();
+                        }, 500);
+
+                        setTimeout(function() {
+                            thanks.addClass('hideIt');
+                            submitBtn.removeClass('hideIt');
+                        }, 3000);
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

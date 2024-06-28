@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\HomeController;
@@ -18,6 +19,7 @@ Route::get('/portfolios', [PortfolioController::class, 'portfolios'])->name('por
 Route::get('/portfolios/{slug}', [PortfolioController::class, 'single_portfolio'])->name('single_portfolio');
 Route::get('/portfolios/category/{slug}', [CategoryController::class, 'category_portfolio'])->name('portfolio_category');
 Route::get('/about', [AboutController::class, 'show_front' ])->name('about');
+Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
 
 
 Route::middleware('auth')->group(function () {
@@ -60,5 +62,15 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
     Route::post('/about/page', [AboutController::class, 'about_page_update' ])->name('about_page_update');
     Route::resource('/about/socials', SocialLinksController::class);
     Route::resource('/about/status', StatusController::class);
+
+    // Routes for Contact Message
+    Route::prefix('/contact')->controller(ContactController::class)->name('contact.')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('/details/{contact}', 'details')->name('details');
+        Route::delete('/{contact}', 'destroy')->name('destroy');
+        Route::get('/mark_all_read', 'mark_all_read')->name('mark_all_read');
+        Route::get('/notification/{notificationId}', 'notificationMarkAsRead')->name('readNotify');
+        Route::post('/delete_all_notifications', 'delete_all_notifications' )->name('delete_all_notifications');
+    });
 
 });

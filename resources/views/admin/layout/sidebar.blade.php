@@ -51,7 +51,7 @@
         </div>
     </li>
 
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Portfolios -->
     <li class="nav-item
             @if (request()->routeIs('admin.portfolios.index') ||
                     request()->routeIs('admin.portfolios.create') ||
@@ -62,7 +62,13 @@
             <span>Portfolio</span></a>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('admin.about.index') ? 'active' : '' }}">
+    <li class="nav-item 
+    @if (request()->routeIs('admin.about.index') ||
+            request()->routeIs('admin.status.index') ||
+            request()->routeIs('admin.status.edit') ||
+            request()->routeIs('admin.socials.edit') ||
+            request()->routeIs('admin.socials.index')) active @endif
+    ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about" aria-expanded="true"
             aria-controls="about">
             <i class="fas fa-address-card"></i>
@@ -78,18 +84,13 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contact" aria-expanded="true"
-            aria-controls="contact">
+    <!-- Nav Item - Contact -->
+    <li class="nav-item 
+    @if (request()->routeIs('admin.contact.index') || request()->routeIs('admin.contact.details')) active @endif
+    ">
+        <a class="nav-link" href="{{ route('admin.contact.index') }}">
             <i class="fas fa-address-book"></i>
-            <span>Contact</span>
-        </a>
-        <div id="contact" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Contact page:</h6>
-                <a class="collapse-item" href="buttons.html">Contact</a>
-            </div>
-        </div>
+            <span>Contact</span></a>
     </li>
 
     <!-- Nav Item - Category -->

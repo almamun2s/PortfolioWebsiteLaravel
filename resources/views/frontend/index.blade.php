@@ -34,7 +34,7 @@
                         <p>{{ $data->welcome_description }}</p>
                     </div>
                     <div class="text-center py-1 wow animate__animated animate__bounceInLeft">
-                        <a href="#" class="btn btn-primary ff-ubuntu text-white reach_btn">Reach out me</a>
+                        <span class="btn btn-primary fw-bolder ff-ubuntu text-white reach_btn">Reach out me</span>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -211,7 +211,7 @@
                                     @if ($key < $data->portfolio_count && $portfolio->is_public == true)
                                         <div class="col-md-3 mb-2">
                                             <div class="portfolio_inner">
-                                                <a href="#">
+                                                <a href="{{ route('single_portfolio', $portfolio->slug) }}">
                                                     <img src="{{ $portfolio->getImg() }}" alt="{{ $portfolio->title }}">
                                                     <h5 class="portfolio_title text-white">{{ $portfolio->title }}</h5>
                                                 </a>
