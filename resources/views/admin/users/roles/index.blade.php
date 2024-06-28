@@ -25,7 +25,7 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
-                                <th>Created</th>
+                                <th>Permissions</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -33,7 +33,7 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
-                                <th>Created</th>
+                                <th>Permissions</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -42,7 +42,12 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $role->name }}</td>
-                                    <td>{{ $role->created_at->diffForHumans() }}</td>
+                                    <td>
+                                        @foreach ($role->permissions as $permission)
+                                            <span class="btn btn-info btn-sm rounded-pill waves-effect waves-light"
+                                                style="display: inline-block;margin:5px;">{{ $permission->name }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-warning">Edit</a>
                                     </td>

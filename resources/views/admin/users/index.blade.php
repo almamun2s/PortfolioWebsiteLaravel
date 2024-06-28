@@ -43,7 +43,13 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->fname }} {{ $user->lname }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><span class="btn btn-primary">Super Admin</span></td>
+                                    <td>
+                                        @foreach ($user->roles as $role)
+                                            <span class="btn btn-primary">{{ $role->name }}
+                                            </span>
+                                        @endforeach
+                                        {{-- <span class="btn btn-primary">Super Admin</span> --}}
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning">Edit</a>
                                     </td>

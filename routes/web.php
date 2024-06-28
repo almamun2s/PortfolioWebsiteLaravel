@@ -77,5 +77,6 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
 
     Route::resource('/users', UserController::class);
     Route::resource('/roles', RoleController::class);
+    Route::put('/roles_permissions/{role}', [RoleController::class, 'roles_permissions'])->name('roles_permissions');
     Route::resource('/permissions', PermissionController::class);
 });

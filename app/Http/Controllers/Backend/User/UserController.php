@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -46,7 +48,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::all();
+        return view('admin.users.edit', compact(['user', 'roles']));
     }
 
     /**
@@ -54,7 +57,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'roles' => 'array|exists:roles,name'
+        ]);
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+        $user->syncRoles($request->role);
+
+        toastr()->success('Role Assigned Successfully.');
+        return redirect()->route('admin.users.index');
+
+
+
     }
 
     /**

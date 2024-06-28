@@ -115,7 +115,14 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item
+    @if (request()->routeIs('admin.roles.index') ||
+            request()->routeIs('admin.roles.create') ||
+            request()->routeIs('admin.roles.edit') ||
+            request()->routeIs('admin.permissions.index') ||
+            request()->routeIs('admin.permissions.create') ||
+            request()->routeIs('admin.permissions.edit')) active @endif
+    ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roles" aria-expanded="true"
             aria-controls="roles">
             <i class="fas fa-key"></i>

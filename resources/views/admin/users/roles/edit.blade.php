@@ -55,6 +55,44 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Update Permission </h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.roles_permissions', $role) }}" method="post">
+                            @csrf
+                            @method('put')
+
+                            <div class="row mb-2">
+                                <div class="col-md-4">Role Name:</div>
+                                <div class="col-md-8">
+                                    @foreach ($permissions as $permission)
+                                        <input type="checkbox" name="permission[]"
+                                            {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}
+                                            id="{{ $permission->name }}" value="{{ $permission->name }}" >
+                                        <label for="{{ $permission->name }}" class="text-bold"
+                                            style="cursor: pointer;">{{ $permission->name }}</label>
+                                        <br>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <input type="submit" class="btn btn-primary" value="Update Role">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.container-fluid -->
 @endsection

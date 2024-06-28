@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\User;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
@@ -55,7 +56,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.users.roles.edit', compact('role'));
+        $permissions = Permission::orderBy('name')->get();
+        return view('admin.users.roles.edit', compact(['role', 'permissions']));
     }
 
     /**
@@ -82,6 +84,16 @@ class RoleController extends Controller
         $role->delete();
 
         toastr()->info('Role Deleted.');
+        return redirect()->route('admin.roles.index');
+    }
+
+    public function roles_permissions(Request $request, Role $role)
+    {
+        if (!empty($request->permission)) {
+            $role->syncPermissions($request->permission);
+        }
+
+        toastr()->success('Role Updated Successfully.');
         return redirect()->route('admin.roles.index');
     }
 }
