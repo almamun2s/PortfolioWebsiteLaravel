@@ -7,15 +7,18 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Messages <span class="btn btn-primary rounded-pill disabled">{{ $messages->count() }}</span></h1>
+            <h1 class="h3 mb-0 text-gray-800">Messages <span
+                    class="btn btn-primary rounded-pill disabled">{{ $messages->count() }}</span></h1>
         </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Message DataTables
-                    <a href="{{ route('admin.contact.mark_all_read') }}" class="float-right btn btn-primary">Mark all as
-                        read</a>
+                    @can('message.read.all')
+                        <a href="{{ route('admin.contact.mark_all_read') }}" class="float-right btn btn-primary">Mark all as
+                            read</a>
+                    @endcan
                 </h6>
             </div>
             <div class="card-body">
@@ -51,15 +54,16 @@
                 </div>
             </div>
         </div>
-
-        <form action="{{ route('admin.contact.delete_all_notifications') }}" method="post" id="deleteForm">
-            @csrf
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <input type="submit" class="btn btn-danger" id="delete" value="Delete All read Notifications">
+        @can('message.delete')
+            <form action="{{ route('admin.contact.delete_all_notifications') }}" method="post" id="deleteForm">
+                @csrf
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-danger" id="delete" value="Delete All read Notifications">
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        @endcan
 
 
     </div>

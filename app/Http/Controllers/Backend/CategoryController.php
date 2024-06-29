@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('category.show')) {
+            abort('401');
+        }
         $categories = Category::latest()->get();
         return view('admin.category.index', compact('categories'));
     }
@@ -24,6 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('category.add')) {
+            abort('401');
+        }
         return view('admin.category.create');
     }
 
@@ -32,6 +39,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('category.add')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required|min:3',
         ]);
@@ -61,6 +71,9 @@ class CategoryController extends Controller
      */
     public function edit(int $id)
     {
+        if (!Auth::user()->can('category.edit')) {
+            abort('401');
+        }
         $category = Category::findOrFail($id);
         return view('admin.category.edit', compact('category'));
     }
@@ -70,6 +83,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('category.edit')) {
+            abort('401');
+        }
         $category = Category::findOrFail($id);
         $otherCategory = Category::where('id', '!=', $id)->get();
         $request->validate([
@@ -95,6 +111,9 @@ class CategoryController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('category.delete')) {
+            abort('401');
+        }
         $category = Category::findOrFail($id);
         $category->delete();
 

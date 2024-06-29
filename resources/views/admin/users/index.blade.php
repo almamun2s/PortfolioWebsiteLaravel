@@ -25,7 +25,9 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Action</th>
+                                @can('user.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,7 +36,9 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Action</th>
+                                @can('user.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </tfoot>
                         <tbody>
@@ -48,11 +52,12 @@
                                             <span class="btn btn-primary">{{ $role->name }}
                                             </span>
                                         @endforeach
-                                        {{-- <span class="btn btn-primary">Super Admin</span> --}}
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @can('user.edit')
+                                        <td>
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

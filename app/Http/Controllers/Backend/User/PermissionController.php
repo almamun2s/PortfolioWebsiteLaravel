@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -13,6 +14,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         $permissions = Permission::orderBy('name')->get();
         return view('admin.users.permissions.index', compact('permissions'));
     }
@@ -22,6 +26,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         return view('admin.users.permissions.create');
     }
 
@@ -30,6 +37,9 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required|min:3|max:50',
         ]);
@@ -55,6 +65,9 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         return view('admin.users.permissions.edit', compact('permission'));
     }
 
@@ -63,6 +76,9 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required|min:3|max:50',
         ]);
@@ -79,6 +95,9 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
+        if (!Auth::user()->can('permission')) {
+            abort('401');
+        }
         $permission->delete();
 
         toastr()->info('Permission Deleted.');

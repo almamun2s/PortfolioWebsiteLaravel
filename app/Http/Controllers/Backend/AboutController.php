@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\SocialLinks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -18,6 +19,9 @@ class AboutController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('about')) {
+            abort('401');
+        }
         $data = Home::find(1);
         return view('admin.about.index', compact('data'));
     }
@@ -41,6 +45,9 @@ class AboutController extends Controller
      */
     public function about_page_update(Request $request)
     {
+        if (!Auth::user()->can('about')) {
+            abort('401');
+        }
         $data = Home::find(1);
         $request->validate([
             'about_details' => 'required|min:20',

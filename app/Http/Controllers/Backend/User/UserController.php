@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,6 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('user.show')) {
+            abort('401');
+        }
         $users = User::get();
         return view('admin.users.index', compact('users'));
     }
@@ -48,6 +52,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (!Auth::user()->can('user.edit')) {
+            abort('401');
+        }
         $roles = Role::all();
         return view('admin.users.edit', compact(['user', 'roles']));
     }
@@ -57,6 +64,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (!Auth::user()->can('user.edit')) {
+            abort('401');
+        }
         // Validate the request
         $request->validate([
             'roles' => 'array|exists:roles,name'
@@ -70,8 +80,6 @@ class UserController extends Controller
         toastr()->success('Role Assigned Successfully.');
         return redirect()->route('admin.users.index');
 
-
-
     }
 
     /**
@@ -79,6 +87,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        abort(404);
     }
 }

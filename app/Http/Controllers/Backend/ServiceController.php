@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -22,6 +23,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('home.service.add')) {
+            abort('401');
+        }
         return view('admin.service.create');
     }
 
@@ -30,6 +34,10 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('home.service.add')) {
+            abort('401');
+        }
+
         $request->validate([
             'title' => 'required|min:5|max:100',
             'sub_title' => 'required|min:10|max:255',
@@ -63,6 +71,9 @@ class ServiceController extends Controller
      */
     public function edit(int $id)
     {
+        if (!Auth::user()->can('home.service.edit')) {
+            abort('401');
+        }
         $service = Service::findOrFail($id);
         return view('admin.service.edit', compact('service'));
     }
@@ -72,6 +83,10 @@ class ServiceController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('home.service.edit')) {
+            abort('401');
+        }
+
         $service = Service::findOrFail($id);
         $request->validate([
             'title' => 'required|min:5|max:100',
@@ -98,6 +113,9 @@ class ServiceController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('home.service.delete')) {
+            abort('401');
+        }
         $service = Service::findOrFail($id);
         $service->delete();
 

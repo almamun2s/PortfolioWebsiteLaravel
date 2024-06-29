@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Backend\User;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -14,6 +15,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('role.show')) {
+            abort('401');
+        }
         $roles = Role::all();
         return view('admin.users.roles.index', compact('roles'));
     }
@@ -23,6 +27,10 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('role.add')) {
+            abort('401');
+        }
+
         return view('admin.users.roles.create');
     }
 
@@ -31,6 +39,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('role.add')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required|min:3|max:50',
         ]);
@@ -56,6 +67,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        if (!Auth::user()->canAny(['role.edit', 'role.permission'])) {
+            abort('401');
+        }
         $permissions = Permission::orderBy('name')->get();
         return view('admin.users.roles.edit', compact(['role', 'permissions']));
     }
@@ -65,6 +79,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        if (!Auth::user()->can('role.edit')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required|min:3|max:50',
         ]);
@@ -81,6 +98,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        if (!Auth::user()->can('role.delete')) {
+            abort('401');
+        }
         $role->delete();
 
         toastr()->info('Role Deleted.');
@@ -89,9 +109,10 @@ class RoleController extends Controller
 
     public function roles_permissions(Request $request, Role $role)
     {
-        if (!empty($request->permission)) {
-            $role->syncPermissions($request->permission);
+        if (!Auth::user()->can('role.permission')) {
+            abort('401');
         }
+        $role->syncPermissions($request->permission);
 
         toastr()->success('Role Updated Successfully.');
         return redirect()->route('admin.roles.index');

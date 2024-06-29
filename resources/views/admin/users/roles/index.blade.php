@@ -15,7 +15,9 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Roles DataTables
-                    <a href="{{ route('admin.roles.create') }}" class="float-right btn btn-primary">Add Role</a>
+                    @can('role.add')
+                        <a href="{{ route('admin.roles.create') }}" class="float-right btn btn-primary">Add Role</a>
+                    @endcan
                 </h6>
             </div>
             <div class="card-body">
@@ -26,7 +28,9 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Permissions</th>
-                                <th>Action</th>
+                                @canany(['role.edit', 'role.permission'])
+                                    <th>Action</th>
+                                @endcanany
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,7 +38,9 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Permissions</th>
-                                <th>Action</th>
+                                @canany(['role.edit', 'role.permission'])
+                                    <th>Action</th>
+                                @endcanany
                             </tr>
                         </tfoot>
                         <tbody>
@@ -48,9 +54,11 @@
                                                 style="display: inline-block;margin:5px;">{{ $permission->name }}</span>
                                         @endforeach
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @canany(['role.edit', 'role.permission'])
+                                        <td>
+                                            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcanany
                                 </tr>
                             @endforeach
                         </tbody>

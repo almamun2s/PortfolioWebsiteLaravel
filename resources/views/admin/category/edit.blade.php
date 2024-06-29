@@ -46,7 +46,8 @@
                             <div class="row mb-2">
                                 <div class="col-md-4">Show on home page:</div>
                                 <div class="col-md-8">
-                                    <input type="checkbox" {{ $category->is_public ? 'checked' : '' }} name="publish" style="cursor: pointer;">
+                                    <input type="checkbox" {{ $category->is_public ? 'checked' : '' }} name="publish"
+                                        style="cursor: pointer;">
                                 </div>
                             </div>
 
@@ -57,18 +58,18 @@
                                 </div>
                             </div>
                         </form>
-
-                        <form action="{{ route('admin.categories.destroy', $category) }}" method="post" id="deleteForm">
-                            @csrf
-                            @method('DELETE')
-                            <div class="row mt-4">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-                                    <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                        @can('category.delete')
+                            <form action="{{ route('admin.categories.destroy', $category) }}" method="post" id="deleteForm">
+                                @csrf
+                                @method('DELETE')
+                                <div class="row mt-4">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>

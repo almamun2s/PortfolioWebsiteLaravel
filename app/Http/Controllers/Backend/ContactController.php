@@ -16,6 +16,9 @@ class ContactController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('message.show')) {
+            abort('401');
+        }
         $messages = Contact::latest()->get();
         return view('admin.contact.index', compact('messages'));
     }
@@ -25,6 +28,9 @@ class ContactController extends Controller
      */
     public function details(Contact $contact)
     {
+        if (!Auth::user()->can('message.read')) {
+            abort('401');
+        }
         if (!$contact->read_at) {
             $contact->read_at = Carbon::now();
             $contact->save();
@@ -37,6 +43,11 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        if (!Auth::user()->can('message.delete')) {
+            abort('401');
+        }
+
+
         $contact->delete();
 
         toastr()->info('Message Deleted.');
@@ -45,6 +56,9 @@ class ContactController extends Controller
 
     public function mark_all_read()
     {
+        if (!Auth::user()->can('message.read.all')) {
+            abort('401');
+        }
         $messages = Contact::get();
         foreach ($messages as $message) {
             if (!$message->read_at) {
@@ -81,7 +95,7 @@ class ContactController extends Controller
         $notifications = DatabaseNotification::get();
 
         foreach ($notifications as $notification) {
-            if($notification->read_at){
+            if ($notification->read_at) {
                 $notification->delete();
             }
         }

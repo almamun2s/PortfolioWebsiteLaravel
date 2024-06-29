@@ -7,14 +7,17 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Portfolio <span class="btn btn-primary rounded-pill disabled">{{ $portfolios->count() }}</span></h1>
+            <h1 class="h3 mb-0 text-gray-800">Portfolio <span
+                    class="btn btn-primary rounded-pill disabled">{{ $portfolios->count() }}</span></h1>
         </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Portfolio DataTables
-                    <a href="{{ route('admin.portfolios.create') }}" class="float-right btn btn-primary">Add Portfolio</a>
+                    @can('portfolio.add')
+                        <a href="{{ route('admin.portfolios.create') }}" class="float-right btn btn-primary">Add Portfolio</a>
+                    @endcan
                 </h6>
             </div>
             <div class="card-body">
@@ -30,7 +33,9 @@
                                 <th>Tags</th>
                                 <th>Uploaded</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                @can('portfolio.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tfoot>
@@ -43,7 +48,9 @@
                                 <th>Tags</th>
                                 <th>Uploaded</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                @can('portfolio.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </tfoot>
                         <tbody>
@@ -80,10 +87,12 @@
                                             <span class="btn btn-danger">Archived</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.portfolios.edit', $portfolio) }}"
-                                            class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @can('portfolio.edit')
+                                        <td>
+                                            <a href="{{ route('admin.portfolios.edit', $portfolio) }}"
+                                                class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

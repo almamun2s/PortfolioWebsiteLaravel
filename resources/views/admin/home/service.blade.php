@@ -58,63 +58,71 @@
             </div>
         </div>
 
-
-        <!-- Service DataTales -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Service DataTables
-                    <a href="{{ route('admin.home.services.create') }}" class="float-right btn btn-primary">Add Service</a>
-                </h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>SL</th>
-                                <th>Icon</th>
-                                <th>Title</th>
-                                <th>Sub title</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>SL</th>
-                                <th>Icon</th>
-                                <th>Title</th>
-                                <th>Sub title</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            @foreach ($services as $key => $service)
+        @can('home.service.show')
+            <!-- Service DataTales -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Service DataTables
+                        @can('home.service.add')
+                            <a href="{{ route('admin.home.services.create') }}" class="float-right btn btn-primary">Add Service</a>
+                        @endcan
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td><i class="{{ $service->icon }}"></i></td>
-                                    <td><a href="{{ route('service', $service->id) }}">{{ $service->title }}</a></td>
-                                    <td>{{ $service->sub_title }}</td>
-                                    <td>
-                                        @if ($service->is_public)
-                                            <span class="btn btn-success">Published</span>
-                                        @else
-                                            <span class="btn btn-danger">Archived</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.home.services.edit', $service ) }}"
-                                            class="btn btn-warning">Edit</a>
-                                    </td>
+                                    <th>SL</th>
+                                    <th>Icon</th>
+                                    <th>Title</th>
+                                    <th>Sub title</th>
+                                    <th>Status</th>
+                                    @can('home.service.edit')
+                                        <th>Action</th>
+                                    @endcan
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Icon</th>
+                                    <th>Title</th>
+                                    <th>Sub title</th>
+                                    <th>Status</th>
+                                    @can('home.service.edit')
+                                        <th>Action</th>
+                                    @endcan
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach ($services as $key => $service)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td><i class="{{ $service->icon }}"></i></td>
+                                        <td><a href="{{ route('service', $service->id) }}">{{ $service->title }}</a></td>
+                                        <td>{{ $service->sub_title }}</td>
+                                        <td>
+                                            @if ($service->is_public)
+                                                <span class="btn btn-success">Published</span>
+                                            @else
+                                                <span class="btn btn-danger">Archived</span>
+                                            @endif
+                                        </td>
+                                        @can('home.service.edit')
+                                            <td>
+                                                <a href="{{ route('admin.home.services.edit', $service) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                            </td>
+                                        @endcan
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        @endcan
 
     </div>
     <!-- /.container-fluid -->

@@ -9,6 +9,7 @@ use App\Models\Process;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Notifications\ContactNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -40,6 +41,9 @@ class HomeController extends Controller
      */
     public function banner()
     {
+        if (!Auth::user()->can('home.banner')) {
+            abort('401');
+        }
         return view('admin.home.banner', ['data' => $this->homeData]);
     }
 
@@ -50,6 +54,9 @@ class HomeController extends Controller
      */
     public function banner_update(Request $request)
     {
+        if (!Auth::user()->can('home.banner')) {
+            abort('401');
+        }
         $this->homeData->hi = $request->hi;
         $this->homeData->name = $request->name;
         $this->homeData->title = $request->title;
@@ -66,6 +73,9 @@ class HomeController extends Controller
      */
     public function welcome()
     {
+        if (!Auth::user()->can('home.welcome')) {
+            abort('401');
+        }
         return view('admin.home.welcome', ['data' => $this->homeData]);
     }
 
@@ -76,6 +86,10 @@ class HomeController extends Controller
      */
     public function welcome_update(Request $request)
     {
+        if (!Auth::user()->can('home.welcome')) {
+            abort('401');
+        }
+
         $this->homeData->welcome_title = $request->welcome_title;
         $this->homeData->welcome_description = $request->welcome_description;
         $this->homeData->quality_icon = $request->quality_icon;
@@ -96,6 +110,9 @@ class HomeController extends Controller
      */
     public function service()
     {
+        if (!Auth::user()->can('home.service')) {
+            abort('401');
+        }
         $services = Service::latest()->get();
         return view('admin.home.service', ['data' => $this->homeData, 'services' => $services]);
     }
@@ -107,6 +124,9 @@ class HomeController extends Controller
      */
     public function service_update(Request $request)
     {
+        if (!Auth::user()->can('home.service')) {
+            abort('401');
+        }
         $this->homeData->service_show = (bool) $request->service_show;
         $this->homeData->service_title = $request->service_title;
         $this->homeData->service_count = (int) $request->service_count;
@@ -123,6 +143,9 @@ class HomeController extends Controller
      */
     public function process()
     {
+        if (!Auth::user()->can('home.process')) {
+            abort('401');
+        }
         $processes = Process::orderBy('serial', 'ASC')->get();
         return view('admin.home.process', ['data' => $this->homeData, 'processes' => $processes]);
     }
@@ -134,6 +157,10 @@ class HomeController extends Controller
      */
     public function process_update(Request $request)
     {
+        if (!Auth::user()->can('home.process')) {
+            abort('401');
+        }
+
         $this->homeData->process_show = (bool) $request->process_show;
         $this->homeData->process_title = $request->process_title;
 
@@ -148,6 +175,10 @@ class HomeController extends Controller
      */
     public function portfolio()
     {
+        if (!Auth::user()->can('home.portfolio')) {
+            abort('401');
+        }
+
         return view('admin.home.portfolio', ['data' => $this->homeData]);
     }
 
@@ -158,6 +189,9 @@ class HomeController extends Controller
      */
     public function portfolio_update(Request $request)
     {
+        if (!Auth::user()->can('home.portfolio')) {
+            abort('401');
+        }
         $this->homeData->portfolio_show = (bool) $request->portfolio_show;
         $this->homeData->portfolio_title = $request->portfolio_title;
         $this->homeData->portfolio_count = (int) $request->portfolio_count;
@@ -168,6 +202,11 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * This method will be called when a user will try to contact 
+     *
+     * @param Request $request
+     */
     public function contact(Request $request)
     {
         $data = [

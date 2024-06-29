@@ -9,6 +9,7 @@ use App\Models\Portfolio;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -20,6 +21,9 @@ class PortfolioController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('portfolio.show')) {
+            abort('401');
+        }
         $portfolios = Portfolio::latest()->get();
         return view('admin.portfolio.index', compact('portfolios'));
     }
@@ -29,6 +33,10 @@ class PortfolioController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('portfolio.add')) {
+            abort('401');
+        }
+
         $categories = Category::latest()->get();
         return view('admin.portfolio.create', compact('categories'));
     }
@@ -38,6 +46,9 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('portfolio.add')) {
+            abort('401');
+        }
         $request->validate([
             'title' => 'required|min:5',
             'details' => 'required|min:10',
@@ -106,6 +117,9 @@ class PortfolioController extends Controller
      */
     public function edit(int $id)
     {
+        if (!Auth::user()->can('portfolio.edit')) {
+            abort('401');
+        }
         $portfolio = Portfolio::findOrFail($id);
         return view('admin.portfolio.edit', compact('portfolio'));
     }
@@ -115,6 +129,9 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('portfolio.edit')) {
+            abort('401');
+        }
         $portfolio = Portfolio::findOrFail($id);
         $otherPortfolio = Portfolio::where('id', '!=', $id)->get();
 
@@ -187,6 +204,9 @@ class PortfolioController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('portfolio.delete')) {
+            abort('401');
+        }
         $portfolio = Portfolio::findOrFail($id);
         // Deleting Previous image if exists
         if (($portfolio->image != null) && (file_exists(public_path('uploads/portfolios/' . $portfolio->image)))) {

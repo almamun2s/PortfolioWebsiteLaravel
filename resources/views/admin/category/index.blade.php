@@ -14,7 +14,9 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Category DataTables
-                    <a href="{{ route('admin.categories.create') }}" class="float-right btn btn-primary">Add Category</a>
+                    @can('category.add')
+                        <a href="{{ route('admin.categories.create') }}" class="float-right btn btn-primary">Add Category</a>
+                    @endcan
                 </h6>
             </div>
             <div class="card-body">
@@ -27,7 +29,9 @@
                                 <th>Slug</th>
                                 <th>Portfolios</th>
                                 <th>Show on home</th>
-                                <th>Action</th>
+                                @can('category.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tfoot>
@@ -37,7 +41,9 @@
                                 <th>Slug</th>
                                 <th>Portfolios</th>
                                 <th>Show on home</th>
-                                <th>Action</th>
+                                @can('category.edit')
+                                    <th>Action</th>
+                                @endcan
                             </tr>
                         </tfoot>
                         <tbody>
@@ -54,10 +60,12 @@
                                             <span class="btn btn-danger">No</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        <a href="{{ route('admin.categories.edit', $category) }}"
-                                            class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @can('category.edit')
+                                        <td>
+                                            <a href="{{ route('admin.categories.edit', $category) }}"
+                                                class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

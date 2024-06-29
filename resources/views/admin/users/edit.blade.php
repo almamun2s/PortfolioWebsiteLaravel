@@ -14,7 +14,8 @@
             <div class="col-md-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Edit User ({{ $user->fname }} {{ $user->lname }})</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edit User ({{ $user->fname }} {{ $user->lname }})
+                        </h6>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.users.update', $user) }}" method="post">
@@ -26,7 +27,8 @@
                                 <div class="col-md-8">
                                     <select name="role" class="form-control">
                                         @foreach ($roles as $role)
-                                            <option {{ $user->hasRole($role->name) ? 'selected' : '' }} value="{{ $role->name }}">{{ $role->name }}</option>
+                                            <option {{ $user->hasRole($role->name) ? 'selected' : '' }}
+                                                value="{{ $role->name }}">{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('name')

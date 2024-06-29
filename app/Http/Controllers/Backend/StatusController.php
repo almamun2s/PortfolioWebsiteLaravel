@@ -6,6 +6,7 @@ use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Enum\Status as StatusEnum;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 
 class StatusController extends Controller
@@ -15,6 +16,9 @@ class StatusController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('about.status.show')) {
+            abort('401');
+        }
         $positions = StatusEnum::cases();
         $allStatus = Status::latest()->get();
         return view('admin.about.status.index', compact(['positions', 'allStatus']));
@@ -33,6 +37,9 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('about.status.add')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required',
             'value' => 'required',
@@ -54,6 +61,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
+
         abort(404);
     }
 
@@ -62,6 +70,10 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
+        if (!Auth::user()->can('about.status.edit')) {
+            abort('401');
+        }
+
         $positions = StatusEnum::cases();
         return view('admin.about.status.edit', compact(['status', 'positions']));
     }
@@ -71,6 +83,9 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
+        if (!Auth::user()->can('about.status.edit')) {
+            abort('401');
+        }
         $request->validate([
             'name' => 'required',
             'value' => 'required',
@@ -92,8 +107,11 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
+        if (!Auth::user()->can('about.status.delete')) {
+            abort('401');
+        }
         $status->delete();
-        
+
         toastr()->info('Status Deleted.');
         return redirect()->route('admin.status.index');
     }

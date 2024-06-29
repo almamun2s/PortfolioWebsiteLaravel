@@ -17,7 +17,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Service</h6>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.home.services.update', $service ) }}" method="post">
+                        <form action="{{ route('admin.home.services.update', $service) }}" method="post">
                             @csrf
                             @method('PUT')
 
@@ -65,7 +65,8 @@
                             <div class="row mb-2">
                                 <div class="col-md-4">Publish:</div>
                                 <div class="col-md-8">
-                                    <input type="checkbox" style="cursor: pointer" name="publish" {{ $service->is_public ? 'checked' : '' }} >
+                                    <input type="checkbox" style="cursor: pointer" name="publish"
+                                        {{ $service->is_public ? 'checked' : '' }}>
                                 </div>
                             </div>
 
@@ -76,17 +77,19 @@
                                 </div>
                             </div>
                         </form>
-
-                        <form action="{{ route('admin.home.services.destroy', $service ) }}" method="post" id="deleteForm">
-                            @csrf
-                            @method('DELETE')
-                            <div class="row mt-4">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-                                    <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                        @can('home.service.delete')
+                            <form action="{{ route('admin.home.services.destroy', $service) }}" method="post"
+                                id="deleteForm">
+                                @csrf
+                                @method('DELETE')
+                                <div class="row mt-4">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endcan
 
                     </div>
                 </div>

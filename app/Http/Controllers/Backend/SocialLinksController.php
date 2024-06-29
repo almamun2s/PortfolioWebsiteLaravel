@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\SocialLinks;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SocialLinksController extends Controller
 {
@@ -13,6 +14,9 @@ class SocialLinksController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('about.social.show')) {
+            abort('401');
+        }
         $sLinks = SocialLinks::latest()->get();
         return view('admin.about.social.index', compact('sLinks'));
     }
@@ -30,6 +34,9 @@ class SocialLinksController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('about.social.add')) {
+            abort('401');
+        }
         $request->validate([
             'icon' => 'required|min:5',
             'link' => 'required|min:5|url'
@@ -57,6 +64,9 @@ class SocialLinksController extends Controller
      */
     public function edit(int $id)
     {
+        if (!Auth::user()->can('about.social.edit')) {
+            abort('401');
+        }
         $link = SocialLinks::findOrFail($id);
         return view('admin.about.social.edit', compact('link'));
     }
@@ -66,6 +76,9 @@ class SocialLinksController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('about.social.edit')) {
+            abort('401');
+        }
         $link = SocialLinks::findOrFail($id);
         $request->validate([
             'icon' => 'required|min:5',
@@ -85,6 +98,9 @@ class SocialLinksController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('about.social.delete')) {
+            abort('401');
+        }
         $link = SocialLinks::findOrFail($id);
 
         $link->delete();
