@@ -55,7 +55,16 @@
                                     </td>
                                     @can('user.edit')
                                         <td>
-                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning">Edit</a>
+                                            @if (auth()->user()->id == $user->id)
+                                                <p>You</p>
+                                            @elseif(
+                                                $user->hasRole(App\Enum\Super::Admin) &&
+                                                    !auth()->user()->hasRole(App\Enum\Super::Admin))
+                                                <p>This is Super Admin</p>
+                                            @else
+                                                <a href="{{ route('admin.users.edit', $user) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                            @endif
                                         </td>
                                     @endcan
                                 </tr>

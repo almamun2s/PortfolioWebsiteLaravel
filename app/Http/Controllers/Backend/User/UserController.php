@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\User;
 
+use App\Enum\Super;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +56,18 @@ class UserController extends Controller
         if (!Auth::user()->can('user.edit')) {
             abort('401');
         }
-        $roles = Role::all();
+        if ($user->hasRole(Super::Admin) && !Auth::user()->hasRole(Super::Admin)) {
+            abort(401);
+        }
+        if (Auth::user()->hasRole(Super::Admin)) {
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', Super::Admin)->get();
+        }
+        if (Auth::user()->id == $user->id) {
+            abort(404);
+        }
+
         return view('admin.users.edit', compact(['user', 'roles']));
     }
 
@@ -67,14 +79,16 @@ class UserController extends Controller
         if (!Auth::user()->can('user.edit')) {
             abort('401');
         }
+        if ($user->hasRole(Super::Admin) && !Auth::user()->hasRole(Super::Admin)) {
+            abort(401);
+        }
+        if (Auth::user()->id == $user->id) {
+            abort(404);
+        }
         // Validate the request
         $request->validate([
-            'roles' => 'array|exists:roles,name'
+            'role' => 'exists:roles,name'
         ]);
-        $user->roles()->detach();
-        if ($request->roles) {
-            $user->assignRole($request->roles);
-        }
         $user->syncRoles($request->role);
 
         toastr()->success('Role Assigned Successfully.');

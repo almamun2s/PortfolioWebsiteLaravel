@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\User;
 
+use App\Enum\Super;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,7 @@ class RoleController extends Controller
         if (!Auth::user()->can('role.show')) {
             abort('401');
         }
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', Super::Admin)->get();
         return view('admin.users.roles.index', compact('roles'));
     }
 
@@ -43,7 +44,7 @@ class RoleController extends Controller
             abort('401');
         }
         $request->validate([
-            'name' => 'required|min:3|max:50',
+            'name' => 'required|min:3|max:50|unique:roles,name',
         ]);
 
         Role::create([
