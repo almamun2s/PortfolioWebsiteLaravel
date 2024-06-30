@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/about.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!-- jQuery JS -->
     <script src="{{ asset('packages/jquery/jquery.js') }}"></script>
     <style>

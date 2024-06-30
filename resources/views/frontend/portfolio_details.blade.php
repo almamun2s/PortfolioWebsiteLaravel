@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <h1 class="special_under">Portfolio</h1>
-                <h2 class="special_upper wow animate__animated animate__fadeInDown">{{ $portfolio->title }}</h2>
+                <h2 class="special_upper wow animate__animated animate__fadeIn">{{ $portfolio->title }}</h2>
             </div>
             <div class="row wow animate__animated animate__fadeInUp">
                 <div class="col-md-8">

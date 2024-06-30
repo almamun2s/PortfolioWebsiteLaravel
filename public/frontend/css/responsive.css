@@ -1,0 +1,20 @@
+@media (max-width:576px) {
+    .special_under{
+        font-size: 3.5rem;
+    }
+    .popup_inner{
+        margin-top: 20vh;
+    }
+}
+
+@media (max-width:450px) {
+    .service_item_left{
+        width: 17%;
+    }
+    .service_item_right{
+        width: 77%;
+    }
+    .popup_inner{
+        margin-top: 10vh;
+    }
+}

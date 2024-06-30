@@ -232,7 +232,7 @@ header {
     }
 
     .wlc_icon {
-        width: 15%;
+        width: 20%;
         position: absolute;
         left: calc(50% - 2.5rem);
     }
@@ -317,7 +317,7 @@ header {
     font-size: 6.5rem;
     width: 100%;
     color: rgba(129, 173, 234, 0.2);
-    letter-spacing: 0.5rem;
+    /* letter-spacing: 0.5rem; */
     text-align: center;
 }
 
