@@ -28,15 +28,18 @@ return new class extends Migration {
 
             $table->boolean('service_show')->default(true)->nullable();
             $table->string('service_title')->nullable();
-            $table->integer('service_count')->nullable();
+            $table->integer('service_count')->nullable()->default(2);
 
             $table->boolean('process_show')->default(true)->nullable();
             $table->string('process_title')->nullable();
 
             $table->boolean('portfolio_show')->default(true)->nullable();
             $table->string('portfolio_title')->nullable();
-            $table->integer('portfolio_count')->nullable();
+            $table->integer('portfolio_count')->nullable()->default(4);
 
+            $table->text('about_details')->nullable();
+            $table->string('about_image')->nullable();
+            
             $table->timestamps();
         });
     }

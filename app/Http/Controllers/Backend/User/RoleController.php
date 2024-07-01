@@ -108,6 +108,12 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.index');
     }
 
+    /**
+     * Updating permissions for a specific role
+     *
+     * @param Request $request
+     * @param Role $role
+     */
     public function roles_permissions(Request $request, Role $role)
     {
         if (!Auth::user()->can('role.permission')) {
