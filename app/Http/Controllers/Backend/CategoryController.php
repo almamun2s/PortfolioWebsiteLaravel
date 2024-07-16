@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
 use App\Models\Category;
+use App\Enum\Permissions;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('category.show')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_SHOW->value)) {
             abort('401');
         }
         $categories = Category::latest()->get();
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('category.add')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_ADD->value)) {
             abort('401');
         }
         return view('admin.category.create');
@@ -39,7 +40,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('category.add')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -71,7 +72,7 @@ class CategoryController extends Controller
      */
     public function edit(int $id)
     {
-        if (!Auth::user()->can('category.edit')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_EDIT->value)) {
             abort('401');
         }
         $category = Category::findOrFail($id);
@@ -83,7 +84,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (!Auth::user()->can('category.edit')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_EDIT->value)) {
             abort('401');
         }
         $category = Category::findOrFail($id);
@@ -111,7 +112,7 @@ class CategoryController extends Controller
      */
     public function destroy(int $id)
     {
-        if (!Auth::user()->can('category.delete')) {
+        if (!Auth::user()->can(Permissions::CATEGORY_DELETE->value)) {
             abort('401');
         }
         $category = Category::findOrFail($id);

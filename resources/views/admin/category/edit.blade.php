@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </form>
-                        @can('category.delete')
+                        @can(App\Enum\Permissions::CATEGORY_DELETE->value)
                             <form action="{{ route('admin.categories.destroy', $category) }}" method="post" id="deleteForm">
                                 @csrf
                                 @method('DELETE')
@@ -74,9 +74,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

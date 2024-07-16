@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enum\Permissions;
 use App\Models\SocialLinks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ class SocialLinksController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('about.social.show')) {
+        if (!Auth::user()->can(Permissions::SOCIAL_SHOW->value)) {
             abort('401');
         }
         $sLinks = SocialLinks::latest()->get();
@@ -34,7 +35,7 @@ class SocialLinksController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('about.social.add')) {
+        if (!Auth::user()->can(Permissions::SOCIAL_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -64,7 +65,7 @@ class SocialLinksController extends Controller
      */
     public function edit(int $id)
     {
-        if (!Auth::user()->can('about.social.edit')) {
+        if (!Auth::user()->can(Permissions::SOCIAL_EDIT->value)) {
             abort('401');
         }
         $link = SocialLinks::findOrFail($id);
@@ -76,7 +77,7 @@ class SocialLinksController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (!Auth::user()->can('about.social.edit')) {
+        if (!Auth::user()->can(Permissions::SOCIAL_EDIT->value)) {
             abort('401');
         }
         $link = SocialLinks::findOrFail($id);
@@ -98,7 +99,7 @@ class SocialLinksController extends Controller
      */
     public function destroy(int $id)
     {
-        if (!Auth::user()->can('about.social.delete')) {
+        if (!Auth::user()->can(Permissions::SOCIAL_DELETE->value)) {
             abort('401');
         }
         $link = SocialLinks::findOrFail($id);

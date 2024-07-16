@@ -58,12 +58,11 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- /.container-fluid -->
+@endsection
 
-
+@section('customScript')
     <script type="text/javascript">
         $(document).ready(function() {
             $('#image').change(function(e) {
@@ -73,7 +72,6 @@
                 }
                 reader.readAsDataURL(e.target.files['0']);
             })
-
         });
     </script>
 @endsection

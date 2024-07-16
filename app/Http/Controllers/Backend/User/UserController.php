@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Enum\Super;
 use App\Models\User;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('user.show')) {
+        if (!Auth::user()->can(Permissions::USER_SHOW->value)) {
             abort('401');
         }
         $users = User::get();
@@ -53,7 +54,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if (!Auth::user()->can('user.edit')) {
+        if (!Auth::user()->can(Permissions::USER_EDIT->value)) {
             abort('401');
         }
         if ($user->hasRole(Super::Admin) && !Auth::user()->hasRole(Super::Admin)) {
@@ -76,7 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (!Auth::user()->can('user.edit')) {
+        if (!Auth::user()->can(Permissions::USER_EDIT->value)) {
             abort('401');
         }
         if ($user->hasRole(Super::Admin) && !Auth::user()->hasRole(Super::Admin)) {

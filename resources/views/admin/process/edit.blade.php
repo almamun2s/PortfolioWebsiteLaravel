@@ -70,24 +70,22 @@
                             </div>
                         </form>
 
-                        <form action="{{ route('admin.home.processes.destroy', $process) }}" method="post" id="deleteForm">
-                            @csrf
-                            @method('DELETE')
-                            <div class="row mt-4">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-                                    <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                        @can(App\Enum\Permissions::PROCESS_DELETE->value)
+                            <form action="{{ route('admin.home.processes.destroy', $process) }}" method="post" id="deleteForm">
+                                @csrf
+                                @method('DELETE')
+                                <div class="row mt-4">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\User;
 
 use App\Enum\Super;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('role.show')) {
+        if (!Auth::user()->can(Permissions::ROLE_SHOW->value)) {
             abort('401');
         }
         $roles = Role::where('name', '!=', Super::Admin)->get();
@@ -28,7 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('role.add')) {
+        if (!Auth::user()->can(Permissions::ROLE_ADD->value)) {
             abort('401');
         }
 
@@ -40,7 +41,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('role.add')) {
+        if (!Auth::user()->can(Permissions::ROLE_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -68,7 +69,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        if (!Auth::user()->canAny(['role.edit', 'role.permission'])) {
+        if (!Auth::user()->canAny([Permissions::ROLE_EDIT->value, Permissions::ROLE_PERMISSION->value])) {
             abort('401');
         }
         $permissions = Permission::orderBy('name')->get();
@@ -80,7 +81,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        if (!Auth::user()->can('role.edit')) {
+        if (!Auth::user()->can(Permissions::ROLE_EDIT->value)) {
             abort('401');
         }
         $request->validate([
@@ -99,7 +100,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        if (!Auth::user()->can('role.delete')) {
+        if (!Auth::user()->can(Permissions::ROLE_DELETE->value)) {
             abort('401');
         }
         $role->delete();
@@ -116,7 +117,7 @@ class RoleController extends Controller
      */
     public function roles_permissions(Request $request, Role $role)
     {
-        if (!Auth::user()->can('role.permission')) {
+        if (!Auth::user()->can(Permissions::ROLE_PERMISSION->value)) {
             abort('401');
         }
         $role->syncPermissions($request->permission);

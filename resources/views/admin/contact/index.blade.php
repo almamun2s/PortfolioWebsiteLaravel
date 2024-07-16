@@ -15,7 +15,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Message DataTables
-                    @can('message.read.all')
+                    @can(App\Enum\Permissions::MESSAGE_READ_ALL->value)
                         <a href="{{ route('admin.contact.mark_all_read') }}" class="float-right btn btn-primary">Mark all as
                             read</a>
                     @endcan
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        @can('message.delete')
+        @can(App\Enum\Permissions::MESSAGE_DELETE->value)
             <form action="{{ route('admin.contact.delete_all_notifications') }}" method="post" id="deleteForm">
                 @csrf
                 <div class="row mt-4">
@@ -64,8 +64,6 @@
                 </div>
             </form>
         @endcan
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

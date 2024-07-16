@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class MediaController extends Controller
@@ -13,18 +15,13 @@ class MediaController extends Controller
      */
     public function index()
     {
-        // Define the path to the uploads directory
+        if (!Auth::user()->can(Permissions::MEDIA_SHOW->value)) {
+            abort(401);
+        }
         $path = public_path('uploads');
-
-        // Initialize an array to store file details
         $fileDetails = [];
-
-        // Check if the directory exists
         if (File::exists($path)) {
-            // Get all files in the directory
             $files = File::allFiles($path);
-
-            // Loop through each file and get its name and extension
             foreach ($files as $file) {
                 $fileDetails[] = [
                     'name' => $file->getRelativePathname(),
@@ -39,9 +36,10 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-
+        if (!Auth::user()->can(Permissions::MEDIA_ADD->value)) {
+            abort(401);
+        }
         $images = $request->file('image');
-
         foreach ($images as $image) {
             $fileName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             $image->move('uploads', $fileName);
@@ -56,6 +54,9 @@ class MediaController extends Controller
      */
     public function destroy(Request $request)
     {
+        if (!Auth::user()->can(Permissions::MEDIA_DELETE->value)) {
+            abort(401);
+        }
         if ($file = public_path('uploads/' . $request->img)) {
             unlink($file);
 
@@ -63,6 +64,6 @@ class MediaController extends Controller
             return redirect()->back();
         }
         toastr()->info('Photos Not found.');
-        return redirect()->back(); 
+        return redirect()->back();
     }
 }

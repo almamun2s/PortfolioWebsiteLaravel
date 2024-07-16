@@ -4,7 +4,7 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        @can('about.status.add')
+        @can(App\Enum\Permissions::STATUS_ADD->value)
             <div class="row">
                 <div class="col-md-7">
                     <div class="card shadow mb-4">
@@ -50,10 +50,7 @@
                                         @enderror
                                     </div>
                                 </div>
-
-
-
-
+                                
                                 <div class="row mb-2">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8">
@@ -83,7 +80,7 @@
                                 <th>Name</th>
                                 <th>Value</th>
                                 <th>Position</th>
-                                @can('about.status.edit')
+                                @can(App\Enum\Permissions::STATUS_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -94,7 +91,7 @@
                                 <th>Name</th>
                                 <th>Value</th>
                                 <th>Position</th>
-                                @can('about.status.edit')
+                                @can(App\Enum\Permissions::STATUS_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -106,7 +103,7 @@
                                     <td>{{ $status->name }}</td>
                                     <td>{{ $status->curr_value }}</td>
                                     <td>{{ $status->position }}</td>
-                                    @can('about.status.edit')
+                                    @can(App\Enum\Permissions::STATUS_EDIT->value)
                                         <td>
                                             <a href="{{ route('admin.status.edit', $status) }}"
                                                 class="btn btn-warning">Edit</a>

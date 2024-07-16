@@ -10,7 +10,7 @@
             <h1 class="h3 mb-0 text-gray-800">Edit Role</h1>
         </div>
 
-        @can('role.edit')
+        @can(App\Enum\Permissions::ROLE_EDIT->value)
             <div class="row">
                 <div class="col-md-7">
                     <div class="card shadow mb-4">
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </form>
-                            @can('role.delete')
+                            @can(App\Enum\Permissions::ROLE_DELETE->value)
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="post" id="deleteForm">
                                     @csrf
                                     @method('DELETE')
@@ -58,7 +58,7 @@
             </div>
         @endcan
 
-        @can('role.permission')
+        @can(App\Enum\Permissions::ROLE_PERMISSION->value)
             <div class="row">
                 <div class="col-md-7">
                     <div class="card shadow mb-4">

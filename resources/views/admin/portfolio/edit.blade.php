@@ -74,8 +74,6 @@
                                 </div>
                             </div>
 
-
-
                             <style>
                                 .label-info {
                                     background-color: #4e73df;
@@ -145,33 +143,36 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="{{ route('admin.portfolios.destroy', $portfolio) }}" method="post" id="deleteForm">
-                            @csrf
-                            @method('DELETE')
-                            <div class="row mt-4">
-                                <div class="col-md-8">
-                                    <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                        @can(App\Enum\Permissions::PORTFOLIO_DELETE->value)
+                            <form action="{{ route('admin.portfolios.destroy', $portfolio) }}" method="post" id="deleteForm">
+                                @csrf
+                                @method('DELETE')
+                                <div class="row mt-4">
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-danger" id="delete" value="Delete">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        @endcan
 
                     </div>
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#image').change(function(e) {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#image_preview').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(e.target.files['0']);
-                })
-            });
-        </script>
-
     </div>
     <!-- /.container-fluid -->
+@endsection
+
+@section('customScript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image_preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            })
+        });
+    </script>
 @endsection

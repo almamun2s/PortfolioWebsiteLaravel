@@ -52,12 +52,12 @@
         </div>
 
 
-        @can('home.process.show')
+        @can(App\Enum\Permissions::PROCESS_SHOW->value)
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Process DataTables
-                        @can('home.process.add')
+                        @can(App\Enum\Permissions::PROCESS_ADD->value)
                             <a href="{{ route('admin.home.processes.create') }}" class="float-right btn btn-primary">Add Process</a>
                         @endcan
                     </h6>
@@ -71,7 +71,7 @@
                                     <th>Icon</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    @can('home.process.edit')
+                                    @can(App\Enum\Permissions::PROCESS_EDIT->value)
                                         <th>Action</th>
                                     @endcan
                                 </tr>
@@ -82,7 +82,7 @@
                                     <th>Icon</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    @can('home.process.edit')
+                                    @can(App\Enum\Permissions::PROCESS_EDIT->value)
                                         <th>Action</th>
                                     @endcan
                                 </tr>
@@ -94,7 +94,7 @@
                                         <td><i class="{{ $process->icon }}"></i></td>
                                         <td>{{ $process->name }}</td>
                                         <td>{{ $process->description }}</td>
-                                        @can('home.process.edit')
+                                        @can(App\Enum\Permissions::PROCESS_EDIT->value)
                                             <td>
                                                 <a href="{{ route('admin.home.processes.edit', $process) }}"
                                                     class="btn btn-warning">Edit</a>
@@ -108,9 +108,6 @@
                 </div>
             </div>
         @endcan
-
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

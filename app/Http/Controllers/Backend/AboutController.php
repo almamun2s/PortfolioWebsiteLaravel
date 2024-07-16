@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Home;
 use App\Models\Status;
+use App\Enum\Permissions;
 use App\Models\SocialLinks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('about')) {
+        if (!Auth::user()->can(Permissions::ABOUT->value)) {
             abort('401');
         }
         $data = Home::find(1);
@@ -45,7 +46,7 @@ class AboutController extends Controller
      */
     public function about_page_update(Request $request)
     {
-        if (!Auth::user()->can('about')) {
+        if (!Auth::user()->can(Permissions::ABOUT->value)) {
             abort('401');
         }
         $data = Home::find(1);

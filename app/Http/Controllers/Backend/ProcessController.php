@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Process;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class ProcessController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('home.process.add')) {
+        if (!Auth::user()->can(Permissions::PROCESS_ADD->value)) {
             abort('401');
         }
         return view('admin.process.create');
@@ -33,7 +34,7 @@ class ProcessController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('home.process.add')) {
+        if (!Auth::user()->can(Permissions::PROCESS_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -67,7 +68,7 @@ class ProcessController extends Controller
      */
     public function edit(int $id)
     {
-        if (!Auth::user()->can('home.process.edit')) {
+        if (!Auth::user()->can(Permissions::PROCESS_EDIT->value)) {
             abort('401');
         }
         $process = Process::findOrFail($id);
@@ -79,7 +80,7 @@ class ProcessController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (!Auth::user()->can('home.process.edit')) {
+        if (!Auth::user()->can(Permissions::PROCESS_EDIT->value)) {
             abort('401');
         }
         $process = Process::findOrFail($id);
@@ -112,7 +113,7 @@ class ProcessController extends Controller
      */
     public function destroy(int $id)
     {
-        if (!Auth::user()->can('home.process.delete')) {
+        if (!Auth::user()->can(Permissions::PROCESS_DELETE->value)) {
             abort('401');
         }
         $process = Process::findOrFail($id);

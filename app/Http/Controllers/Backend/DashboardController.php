@@ -11,7 +11,6 @@ class DashboardController extends Controller
     public function index()
     {
         $portfolios = Portfolio::get();
-        // dd($portfolios);
         return view('admin.dashboard', compact(['portfolios']));
     }
 }

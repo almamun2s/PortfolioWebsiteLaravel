@@ -122,20 +122,21 @@
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#image').change(function(e) {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#image_preview').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(e.target.files['0']);
-                })
-
-            });
-        </script>
-
     </div>
     <!-- /.container-fluid -->
+@endsection
+
+@section('customScript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image_preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            })
+
+        });
+    </script>
 @endsection

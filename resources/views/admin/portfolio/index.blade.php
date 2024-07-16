@@ -15,7 +15,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Portfolio DataTables
-                    @can('portfolio.add')
+                    @can(App\Enum\Permissions::PORTFOLIO_ADD->value)
                         <a href="{{ route('admin.portfolios.create') }}" class="float-right btn btn-primary">Add Portfolio</a>
                     @endcan
                 </h6>
@@ -33,7 +33,7 @@
                                 <th>Tags</th>
                                 <th>Uploaded</th>
                                 <th>Status</th>
-                                @can('portfolio.edit')
+                                @can(App\Enum\Permissions::PORTFOLIO_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -48,7 +48,7 @@
                                 <th>Tags</th>
                                 <th>Uploaded</th>
                                 <th>Status</th>
-                                @can('portfolio.edit')
+                                @can(App\Enum\Permissions::PORTFOLIO_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -87,7 +87,7 @@
                                             <span class="btn btn-danger">Archived</span>
                                         @endif
                                     </td>
-                                    @can('portfolio.edit')
+                                    @can(App\Enum\Permissions::PORTFOLIO_EDIT->value)
                                         <td>
                                             <a href="{{ route('admin.portfolios.edit', $portfolio) }}"
                                                 class="btn btn-warning">Edit</a>
@@ -100,9 +100,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

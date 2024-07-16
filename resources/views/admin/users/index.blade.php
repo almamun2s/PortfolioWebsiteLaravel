@@ -25,7 +25,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                @can('user.edit')
+                                @can(App\Enum\Permissions::USER_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -36,7 +36,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                @can('user.edit')
+                                @can(App\Enum\Permissions::USER_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -53,7 +53,7 @@
                                             </span>
                                         @endforeach
                                     </td>
-                                    @can('user.edit')
+                                    @can(App\Enum\Permissions::USER_EDIT->value)
                                         <td>
                                             @if (auth()->user()->id == $user->id)
                                                 <p>You</p>

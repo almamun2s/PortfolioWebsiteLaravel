@@ -32,8 +32,7 @@
                             <div class="col-md-8">{{ $contact->message }}</div>
                         </div>
 
-
-                        @can('message.delete')
+                        @can(App\Enum\Permissions::MESSAGE_DELETE->value)
                             <form action="{{ route('admin.contact.destroy', $contact) }}" method="post" id="deleteForm">
                                 @csrf
                                 @method('DELETE')
@@ -44,14 +43,10 @@
                                 </div>
                             </form>
                         @endcan
-
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <!-- /.container-fluid -->
 @endsection

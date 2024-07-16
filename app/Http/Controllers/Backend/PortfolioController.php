@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Carbon\Carbon;
 use App\Models\Home;
 use App\Models\Category;
+use App\Enum\Permissions;
 use App\Models\Portfolio;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('portfolio.show')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_SHOW->value)) {
             abort('401');
         }
         $portfolios = Portfolio::latest()->get();
@@ -33,7 +34,7 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('portfolio.add')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_ADD->value)) {
             abort('401');
         }
 
@@ -46,7 +47,7 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('portfolio.add')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -117,7 +118,7 @@ class PortfolioController extends Controller
      */
     public function edit(int $id)
     {
-        if (!Auth::user()->can('portfolio.edit')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_EDIT->value)) {
             abort('401');
         }
         $portfolio = Portfolio::findOrFail($id);
@@ -129,7 +130,7 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (!Auth::user()->can('portfolio.edit')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_EDIT->value)) {
             abort('401');
         }
         $portfolio = Portfolio::findOrFail($id);
@@ -204,7 +205,7 @@ class PortfolioController extends Controller
      */
     public function destroy(int $id)
     {
-        if (!Auth::user()->can('portfolio.delete')) {
+        if (!Auth::user()->can(Permissions::PORTFOLIO_DELETE->value)) {
             abort('401');
         }
         $portfolio = Portfolio::findOrFail($id);

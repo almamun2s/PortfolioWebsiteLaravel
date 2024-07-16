@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </form>
-                        @can('home.service.delete')
+                        @can(App\Enum\Permissions::SERVICE_DELETE->value)
                             <form action="{{ route('admin.home.services.destroy', $service) }}" method="post"
                                 id="deleteForm">
                                 @csrf

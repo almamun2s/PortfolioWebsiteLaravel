@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Contact;
 use App\Models\Process;
 use App\Models\Service;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ class HomeController extends Controller
      */
     public function banner()
     {
-        if (!Auth::user()->can('home.banner')) {
+        if (!Auth::user()->can(Permissions::HOME_BANNER->value)) {
             abort('401');
         }
         return view('admin.home.banner', ['data' => $this->homeData]);
@@ -54,7 +55,7 @@ class HomeController extends Controller
      */
     public function banner_update(Request $request)
     {
-        if (!Auth::user()->can('home.banner')) {
+        if (!Auth::user()->can(Permissions::HOME_BANNER->value)) {
             abort('401');
         }
         $this->homeData->hi = $request->hi;
@@ -73,7 +74,7 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-        if (!Auth::user()->can('home.welcome')) {
+        if (!Auth::user()->can(Permissions::HOME_WELCOME->value)) {
             abort('401');
         }
         return view('admin.home.welcome', ['data' => $this->homeData]);
@@ -86,7 +87,7 @@ class HomeController extends Controller
      */
     public function welcome_update(Request $request)
     {
-        if (!Auth::user()->can('home.welcome')) {
+        if (!Auth::user()->can(Permissions::HOME_WELCOME->value)) {
             abort('401');
         }
 
@@ -110,7 +111,7 @@ class HomeController extends Controller
      */
     public function service()
     {
-        if (!Auth::user()->can('home.service')) {
+        if (!Auth::user()->can(Permissions::HOME_SERVICE->value)) {
             abort('401');
         }
         $services = Service::latest()->get();
@@ -124,7 +125,7 @@ class HomeController extends Controller
      */
     public function service_update(Request $request)
     {
-        if (!Auth::user()->can('home.service')) {
+        if (!Auth::user()->can(Permissions::HOME_SERVICE->value)) {
             abort('401');
         }
         $this->homeData->service_show = (bool) $request->service_show;
@@ -143,7 +144,7 @@ class HomeController extends Controller
      */
     public function process()
     {
-        if (!Auth::user()->can('home.process')) {
+        if (!Auth::user()->can(Permissions::HOME_PROCESS->value)) {
             abort('401');
         }
         $processes = Process::orderBy('serial', 'ASC')->get();
@@ -157,7 +158,7 @@ class HomeController extends Controller
      */
     public function process_update(Request $request)
     {
-        if (!Auth::user()->can('home.process')) {
+        if (!Auth::user()->can(Permissions::HOME_PROCESS->value)) {
             abort('401');
         }
 
@@ -175,7 +176,7 @@ class HomeController extends Controller
      */
     public function portfolio()
     {
-        if (!Auth::user()->can('home.portfolio')) {
+        if (!Auth::user()->can(Permissions::HOME_PORTFOLIO->value)) {
             abort('401');
         }
 
@@ -189,7 +190,7 @@ class HomeController extends Controller
      */
     public function portfolio_update(Request $request)
     {
-        if (!Auth::user()->can('home.portfolio')) {
+        if (!Auth::user()->can(Permissions::HOME_PORTFOLIO->value)) {
             abort('401');
         }
         $this->homeData->portfolio_show = (bool) $request->portfolio_show;

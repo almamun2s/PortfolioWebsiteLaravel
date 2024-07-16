@@ -14,12 +14,14 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">All Uploads
-                    <form action="{{ route('admin.media.store') }}" class="float-right" enctype="multipart/form-data"
-                        method="post">
-                        @csrf
-                        <input type="file" name="image[]" multiple>
-                        <input type="submit" value="Upload" class="btn btn-primary">
-                    </form>
+                    @can(App\Enum\Permissions::MEDIA_ADD->value)
+                        <form action="{{ route('admin.media.store') }}" class="float-right" enctype="multipart/form-data"
+                            method="post">
+                            @csrf
+                            <input type="file" name="image[]" multiple>
+                            <input type="submit" value="Upload" class="btn btn-primary">
+                        </form>
+                    @endcan
                 </h6>
             </div>
             <div class="card-body">
@@ -30,18 +32,21 @@
                                 style="width:90%;height: auto;max-height: 10rem;">
                             <div style="position: relative; margin-top: 0.5rem;">
                                 <textarea class="form-controle" style="width: 100%;height: 2rem; resize: none;">{{ url('/uploads/' . $file['name']) }}</textarea>
-                                <form action="{{ route('admin.media.delete') }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="hidden" name="img" value="{{ $file['name'] }}">
-                                </form>
+                                @can(App\Enum\Permissions::MEDIA_DELETE->value)
+                                    <form action="{{ route('admin.media.delete') }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="hidden" name="img" value="{{ $file['name'] }}">
+                                    </form>
+                                    <span
+                                        style="position: absolute; width: 40%;height: 2rem; top: 0; right: 0; color: #fff; cursor: pointer;"
+                                        class="bg-danger delete">Delete</span>
+                                @endcan
                                 <span
                                     style="position: absolute; width: 60%;height: 2rem; top: 0; left: 0; background-color: #00AEEF; color: #fff; cursor: pointer;"
                                     class="image">Copy
                                     URL</span>
-                                <span
-                                    style="position: absolute; width: 40%;height: 2rem; top: 0; right: 0; color: #fff; cursor: pointer;"
-                                    class="bg-danger delete">Delete</span>
+
                             </div>
                         </div>
                     @endforeach

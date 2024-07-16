@@ -58,12 +58,12 @@
             </div>
         </div>
 
-        @can('home.service.show')
+        @can(App\Enum\Permissions::SERVICE_SHOW->value)
             <!-- Service DataTales -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Service DataTables
-                        @can('home.service.add')
+                        @can(App\Enum\Permissions::SERVICE_ADD->value)
                             <a href="{{ route('admin.home.services.create') }}" class="float-right btn btn-primary">Add Service</a>
                         @endcan
                     </h6>
@@ -78,7 +78,7 @@
                                     <th>Title</th>
                                     <th>Sub title</th>
                                     <th>Status</th>
-                                    @can('home.service.edit')
+                                    @can(App\Enum\Permissions::SERVICE_EDIT->value)
                                         <th>Action</th>
                                     @endcan
                                 </tr>
@@ -90,7 +90,7 @@
                                     <th>Title</th>
                                     <th>Sub title</th>
                                     <th>Status</th>
-                                    @can('home.service.edit')
+                                    @can(App\Enum\Permissions::SERVICE_EDIT->value)
                                         <th>Action</th>
                                     @endcan
                                 </tr>
@@ -109,7 +109,7 @@
                                                 <span class="btn btn-danger">Archived</span>
                                             @endif
                                         </td>
-                                        @can('home.service.edit')
+                                        @can(App\Enum\Permissions::SERVICE_EDIT->value)
                                             <td>
                                                 <a href="{{ route('admin.home.services.edit', $service) }}"
                                                     class="btn btn-warning">Edit</a>
@@ -123,7 +123,6 @@
                 </div>
             </div>
         @endcan
-
     </div>
     <!-- /.container-fluid -->
 @endsection

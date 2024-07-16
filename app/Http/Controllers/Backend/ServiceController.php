@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
 use App\Models\Service;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->can('home.service.add')) {
+        if (!Auth::user()->can(Permissions::SERVICE_ADD->value)) {
             abort('401');
         }
         return view('admin.service.create');
@@ -34,7 +35,7 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('home.service.add')) {
+        if (!Auth::user()->can(Permissions::SERVICE_ADD->value)) {
             abort('401');
         }
 
@@ -71,7 +72,7 @@ class ServiceController extends Controller
      */
     public function edit(int $id)
     {
-        if (!Auth::user()->can('home.service.edit')) {
+        if (!Auth::user()->can(Permissions::SERVICE_EDIT->value)) {
             abort('401');
         }
         $service = Service::findOrFail($id);
@@ -83,7 +84,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (!Auth::user()->can('home.service.edit')) {
+        if (!Auth::user()->can(Permissions::SERVICE_EDIT->value)) {
             abort('401');
         }
 
@@ -113,7 +114,7 @@ class ServiceController extends Controller
      */
     public function destroy(int $id)
     {
-        if (!Auth::user()->can('home.service.delete')) {
+        if (!Auth::user()->can(Permissions::SERVICE_DELETE->value)) {
             abort('401');
         }
         $service = Service::findOrFail($id);

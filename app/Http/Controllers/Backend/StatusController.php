@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Status;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Enum\Status as StatusEnum;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('about.status.show')) {
+        if (!Auth::user()->can(Permissions::STATUS_SHOW->value)) {
             abort('401');
         }
         $positions = StatusEnum::cases();
@@ -37,7 +38,7 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::user()->can('about.status.add')) {
+        if (!Auth::user()->can(Permissions::STATUS_ADD->value)) {
             abort('401');
         }
         $request->validate([
@@ -70,7 +71,7 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
-        if (!Auth::user()->can('about.status.edit')) {
+        if (!Auth::user()->can(Permissions::STATUS_EDIT->value)) {
             abort('401');
         }
 
@@ -83,7 +84,7 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
-        if (!Auth::user()->can('about.status.edit')) {
+        if (!Auth::user()->can(Permissions::STATUS_EDIT->value)) {
             abort('401');
         }
         $request->validate([
@@ -107,7 +108,7 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        if (!Auth::user()->can('about.status.delete')) {
+        if (!Auth::user()->can(Permissions::STATUS_DELETE->value)) {
             abort('401');
         }
         $status->delete();

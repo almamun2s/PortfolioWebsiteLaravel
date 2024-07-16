@@ -15,7 +15,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Roles DataTables
-                    @can('role.add')
+                    @can(App\Enum\Permissions::ROLE_ADD->value)
                         <a href="{{ route('admin.roles.create') }}" class="float-right btn btn-primary">Add Role</a>
                     @endcan
                 </h6>
@@ -28,7 +28,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Permissions</th>
-                                @canany(['role.edit', 'role.permission'])
+                                @canany([App\Enum\Permissions::ROLE_EDIT->value, App\Enum\Permissions::ROLE_PERMISSION->value])
                                     <th>Action</th>
                                 @endcanany
                             </tr>
@@ -38,7 +38,7 @@
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Permissions</th>
-                                @canany(['role.edit', 'role.permission'])
+                                @canany([App\Enum\Permissions::ROLE_EDIT->value, App\Enum\Permissions::ROLE_PERMISSION->value])
                                     <th>Action</th>
                                 @endcanany
                             </tr>
@@ -54,7 +54,7 @@
                                                 style="display: inline-block;margin:5px;">{{ $permission->name }}</span>
                                         @endforeach
                                     </td>
-                                    @canany(['role.edit', 'role.permission'])
+                                    @canany([App\Enum\Permissions::ROLE_EDIT->value, App\Enum\Permissions::ROLE_PERMISSION->value])
                                         <td>
                                             <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-warning">Edit</a>
                                         </td>

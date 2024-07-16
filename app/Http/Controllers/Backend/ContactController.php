@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
 use App\Models\Contact;
+use App\Enum\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        if (!Auth::user()->can('message.show')) {
+        if (!Auth::user()->can(Permissions::MESSAGE_SHOW->value)) {
             abort('401');
         }
         $messages = Contact::latest()->get();
@@ -28,7 +29,7 @@ class ContactController extends Controller
      */
     public function details(Contact $contact)
     {
-        if (!Auth::user()->can('message.read')) {
+        if (!Auth::user()->can(Permissions::MESSAGE_READ->value)) {
             abort('401');
         }
         if (!$contact->read_at) {
@@ -43,7 +44,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        if (!Auth::user()->can('message.delete')) {
+        if (!Auth::user()->can(Permissions::MESSAGE_DELETE->value)) {
             abort('401');
         }
 
@@ -56,7 +57,7 @@ class ContactController extends Controller
 
     public function mark_all_read()
     {
-        if (!Auth::user()->can('message.read.all')) {
+        if (!Auth::user()->can(Permissions::MESSAGE_READ_ALL->value)) {
             abort('401');
         }
         $messages = Contact::get();

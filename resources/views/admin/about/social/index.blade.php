@@ -4,7 +4,7 @@
 @section('content')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        @can('about.social.add')
+        @can(App\Enum\Permissions::SOCIAL_ADD->value)
             <div class="row">
                 <div class="col-md-7">
                     <div class="card shadow mb-4">
@@ -66,7 +66,7 @@
                                 <th>SL</th>
                                 <th>Icon</th>
                                 <th>Link</th>
-                                @can('about.social.edit')
+                                @can(App\Enum\Permissions::SOCIAL_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -76,7 +76,7 @@
                                 <th>SL</th>
                                 <th>Icon</th>
                                 <th>Link</th>
-                                @can('about.social.edit')
+                                @can(App\Enum\Permissions::SOCIAL_EDIT->value)
                                     <th>Action</th>
                                 @endcan
                             </tr>
@@ -87,7 +87,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td><i class="{{ $link->icon }}"></i></td>
                                     <td><a href="{{ $link->links }}">{{ $link->links }}</a></td>
-                                    @can('about.social.edit')
+                                    @can(App\Enum\Permissions::SOCIAL_EDIT->value)
                                         <td>
                                             <a href="{{ route('admin.socials.edit', $link) }}" class="btn btn-warning">Edit</a>
                                         </td>
