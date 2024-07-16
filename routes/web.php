@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\MediaController;
 use App\Http\Controllers\Backend\User\PermissionController;
 use App\Http\Controllers\Backend\User\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -79,4 +80,7 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->name('admin.')->g
     Route::resource('/roles', RoleController::class);
     Route::put('/roles_permissions/{role}', [RoleController::class, 'roles_permissions'])->name('roles_permissions');
     Route::resource('/permissions', PermissionController::class);
+    Route::get('/media', [MediaController::class, 'index'])->name('media.index');
+    Route::post('/media/add', [MediaController::class, 'store'])->name('media.store');
+    Route::delete('/media/delete', [MediaController::class, 'destroy'])->name('media.delete');
 });

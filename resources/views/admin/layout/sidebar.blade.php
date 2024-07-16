@@ -131,6 +131,16 @@
         </li>
     @endcan
 
+    {{-- @can('category.show') --}}
+    <div class="sidebar-heading">Media</div>
+    <!-- Nav Item - Category -->
+    <li class="nav-item {{ request()->routeIs('admin.media.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.media.index') }}">
+            <i class="fa-solid fa-photo-film"></i>
+            <span>Uploads</span></a>
+    </li>
+    {{-- @endcan --}}
+
     @canany(['user,show', 'role.show', 'permission'])
         <div class="sidebar-heading">Settings</div>
     @endcanany
