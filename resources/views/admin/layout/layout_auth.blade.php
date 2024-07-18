@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('uploads/frontImg/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('frontImg/favicon.png') }}" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('packages/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -115,7 +115,7 @@
     <script src="{{ asset('packages/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- JS for tinymce -->
-    <script src="https://cdn.tiny.cloud/1/rmjgw8lpaxz7g36aqrox2jv5ec5evkqhhnpdwukg393ekqk2/tinymce/7/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/7wyduspokn9tbg1s1ash2crnk8rnzaelrvkqtf9teeq5i3x3/tinymce/7/tinymce.min.js"
         referrerpolicy="origin"></script>
     <!-- JS for Sweetalart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

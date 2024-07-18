@@ -6,7 +6,7 @@
 
 
     <!-- Banner Section -->
-    <section class="banner" style="background-image: url({{ asset('uploads/frontImg/herobg.jpg') }});">
+    <section class="banner" style="background-image: url({{ asset('frontImg/herobg.jpg') }});">
         <div class="container">
             <div class="row text-white">
                 <div class="col-md-6 my-title">
@@ -79,7 +79,6 @@
         </div>
     </section>
 
-
     @if ($data->service_show)
         <!-- Service Section -->
         <section class="service">
@@ -111,12 +110,6 @@
                             </a>
                         </div>
                     @endforeach
-
-
-
-
-
-
                 </div>
             </div>
         </section>
@@ -222,13 +215,8 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
-
-
-
             </div>
         </section>
     @endif
-
 @endsection

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('uploads/frontImg/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('frontImg/favicon.png') }}" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('packages/bootstrap4/bootstrap4.min.css') }}">
     <!-- Font Awesome CSS -->
@@ -39,7 +39,7 @@
                 <div class="col-md-2">
                     <div class="logo">
                         <a href="{{ route('home') }}" target="_blank">
-                            <img src="{{ asset('uploads/frontImg/logo.png') }}" alt="Abdullah Almamun">
+                            <img src="{{ asset('frontImg/logo.png') }}" alt="Abdullah Almamun">
                         </a>
                     </div>
                 </div>
@@ -134,15 +134,10 @@
         </div>
     </div>
 
-
     <!-- Footer -->
     <footer class="py-4" style="background-color: #000;">
         <h4 class="text-center text-white">All &copy; right reserved by Abdullah Almamun</h4>
     </footer>
-
-
-
-
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('packages/bootstrap4/bootstrap.min.js') }}"></script>
@@ -170,7 +165,6 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
 
                 $.ajax({
                     type: 'POST',

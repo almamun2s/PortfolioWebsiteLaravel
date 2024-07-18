@@ -82,7 +82,7 @@
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     {{ auth()->user()->fname . ' ' . auth()->user()->lname }} </span>
-                <img class="img-profile rounded-circle" src="{{ asset('uploads/frontImg/myphoto.png') }}">
+                <img class="img-profile rounded-circle" src="{{ asset('frontImg/myphoto.png') }}">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -96,8 +96,6 @@
                 </a>
             </div>
         </li>
-
     </ul>
-
 </nav>
 <!-- End of Topbar -->

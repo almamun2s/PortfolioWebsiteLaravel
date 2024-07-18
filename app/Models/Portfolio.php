@@ -22,8 +22,8 @@ class Portfolio extends Model
     public function getImg()
     {
         if (($this->image != null) && (file_exists(public_path('uploads/portfolios/' . $this->image)))) {
-            return url('uploads/portfolios/' . $this->image);
+            return asset('uploads/portfolios/' . $this->image);
         }
-        return url('uploads/no_image.jpg');
+        return asset('frontImg/no_image.jpg');
     }
 }

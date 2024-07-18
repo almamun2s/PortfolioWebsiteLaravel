@@ -27,11 +27,13 @@
             <div class="card-body">
                 <div class="row">
                     @foreach ($fileDetails as $file)
+                        @php
+                            $imgUrl = url('/uploads/' . $file['name']);
+                        @endphp
                         <div class="col-2 text-center mt-2">
-                            <img src="{{ url('/uploads/' . $file['name']) }}" alt="No image"
-                                style="width:90%;height: auto;max-height: 10rem;">
+                            <img src="{{ $imgUrl }}" alt="No image" style="width:90%;height: auto;max-height: 10rem;">
                             <div style="position: relative; margin-top: 0.5rem;">
-                                <textarea class="form-controle" style="width: 100%;height: 2rem; resize: none;">{{ url('/uploads/' . $file['name']) }}</textarea>
+                                <textarea class="form-controle" style="width: 100%;height: 2rem; resize: none;">{{ $imgUrl }}</textarea>
                                 @can(App\Enum\Permissions::MEDIA_DELETE->value)
                                     <form action="{{ route('admin.media.delete') }}" method="post">
                                         @csrf

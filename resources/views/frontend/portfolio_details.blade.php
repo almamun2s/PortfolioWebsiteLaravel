@@ -31,12 +31,10 @@
                 </div>
             </div>
             <div class="row wow animate__animated animate__fadeInUp mt-5">
-                <div class="col-md-12">
+                <div class="col-md-12" style="font-size: 1.5rem;">
                     {!! $portfolio->details !!}
                 </div>
             </div>
-
-
         </div>
     </section>
 @endsection

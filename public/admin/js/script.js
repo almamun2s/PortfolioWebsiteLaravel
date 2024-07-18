@@ -5,7 +5,10 @@ $(document).ready(function () {
 
 // Tinymce
 tinymce.init({
-    selector: '#mytextarea'
+    selector: '#mytextarea',
+    plugins: 'advlist autolink autosave code image media table emoticons fullpage searchreplace wordcount print',
+    toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table emoticons | code fullpage searchreplace wordcount print',
+    menubar: 'file edit view insert format tools table help',
 });
 
 // Sweet Alart
