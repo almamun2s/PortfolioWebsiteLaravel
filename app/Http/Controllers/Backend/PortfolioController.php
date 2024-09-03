@@ -71,20 +71,20 @@ class PortfolioController extends Controller
 
             // Renaming the file
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            if (!file_exists(public_path('uploads/portfolios'))) {
-                mkdir(public_path('uploads/portfolios'));
+            if (!file_exists(PUBLIC_PATH . 'uploads/portfolios')) {
+                mkdir(PUBLIC_PATH . 'uploads/portfolios');
             }
             // Uploading the file to upload directory
-            $file->move('uploads', $fileName);
+            $file->move(PUBLIC_PATH . 'uploads', $fileName);
 
             // Resize the image and move
             $imageManager = new ImageManager(Driver::class);
             $image = $imageManager->read("uploads/$fileName");
             $image->resize(1140, 760);
-            $image->save(public_path('uploads/portfolios/') . $fileName);
+            $image->save(PUBLIC_PATH . 'uploads/portfolios/' . $fileName);
 
             // Deleting image from upload directory
-            unlink(public_path('uploads/' . $fileName));
+            unlink(PUBLIC_PATH . 'uploads/' . $fileName);
         }
 
         $portfolio = Portfolio::create([
@@ -167,23 +167,23 @@ class PortfolioController extends Controller
 
             // Renaming the file
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            if (!file_exists(public_path('uploads/portfolios'))) {
-                mkdir(public_path('uploads/portfolios'));
+            if (!file_exists(PUBLIC_PATH . 'uploads/portfolios')) {
+                mkdir(PUBLIC_PATH . 'uploads/portfolios');
             }
             // Uploading the file to upload directory
-            $file->move('uploads', $fileName);
+            $file->move(PUBLIC_PATH . 'uploads', $fileName);
 
             // Resize the image and move
             $imageManager = new ImageManager(Driver::class);
             $image = $imageManager->read("uploads/$fileName");
             $image->resize(1140, 760);
-            $image->save(public_path('uploads/portfolios/') . $fileName);
+            $image->save(PUBLIC_PATH . 'uploads/portfolios/' . $fileName);
 
             // Deleting image from upload directory
-            unlink(public_path('uploads/' . $fileName));
+            unlink(PUBLIC_PATH . 'uploads/' . $fileName);
             // Deleting Previous image if exists
-            if (($portfolio->image != null) && (file_exists(public_path('uploads/portfolios/' . $portfolio->image)))) {
-                unlink(public_path('uploads/portfolios/' . $portfolio->image));
+            if (($portfolio->image != null) && (file_exists(PUBLIC_PATH . 'uploads/portfolios/' . $portfolio->image))) {
+                unlink(PUBLIC_PATH . 'uploads/portfolios/' . $portfolio->image);
             }
 
             // Saving image name to DB
@@ -210,8 +210,8 @@ class PortfolioController extends Controller
         }
         $portfolio = Portfolio::findOrFail($id);
         // Deleting Previous image if exists
-        if (($portfolio->image != null) && (file_exists(public_path('uploads/portfolios/' . $portfolio->image)))) {
-            unlink(public_path('uploads/portfolios/' . $portfolio->image));
+        if (($portfolio->image != null) && (file_exists(PUBLIC_PATH . 'uploads/portfolios/' . $portfolio->image))) {
+            unlink(PUBLIC_PATH . 'uploads/portfolios/' . $portfolio->image);
         }
         $portfolio->delete();
 

@@ -16,7 +16,7 @@ class Home extends Model
      */
     public function getImg()
     {
-        if (($this->about_image != null) && (file_exists(public_path('uploads/' . $this->about_image)))) {
+        if (($this->about_image != null) && (file_exists(PUBLIC_PATH . 'uploads/' . $this->about_image))) {
             return asset('uploads/' . $this->about_image);
         }
         return asset('frontImg/no_image.jpg');

@@ -63,20 +63,20 @@ class AboutController extends Controller
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
             // Uploading the file to upload directory
-            $file->move('uploads', $fileName);
+            $file->move(PUBLIC_PATH . 'uploads', $fileName);
 
             // Resize the image and move
             $imageManager = new ImageManager(Driver::class);
             $image = $imageManager->read("uploads/$fileName");
             $image->resize(400, 400);
             $fileUpdatedName = hexdec(uniqid()) . '_400.' . $file->getClientOriginalExtension();
-            $image->save(public_path('uploads/') . $fileUpdatedName);
+            $image->save(PUBLIC_PATH . 'uploads/' . $fileUpdatedName);
 
             // Deleting image from upload directory
-            unlink(public_path('uploads/' . $fileName));
+            unlink(PUBLIC_PATH . 'uploads/' . $fileName);
             // Deleting Previous image if exists
-            if (($data->about_image != null) && (file_exists(public_path('uploads/' . $data->about_image)))) {
-                unlink(public_path('uploads/' . $data->about_image));
+            if (($data->about_image != null) && (file_exists(PUBLIC_PATH . 'uploads/' . $data->about_image))) {
+                unlink(PUBLIC_PATH . 'uploads/' . $data->about_image);
             }
 
             // Saving image name to DB

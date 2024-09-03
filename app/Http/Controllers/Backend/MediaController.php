@@ -18,7 +18,7 @@ class MediaController extends Controller
         if (!Auth::user()->can(Permissions::MEDIA_SHOW->value)) {
             abort(401);
         }
-        $path = public_path('uploads');
+        $path = PUBLIC_PATH . 'uploads';
         $fileDetails = [];
         if (File::exists($path)) {
             $files = File::allFiles($path);
@@ -57,7 +57,7 @@ class MediaController extends Controller
         if (!Auth::user()->can(Permissions::MEDIA_DELETE->value)) {
             abort(401);
         }
-        if ($file = public_path('uploads/' . $request->img)) {
+        if ($file = PUBLIC_PATH . 'uploads/' . $request->img) {
             unlink($file);
 
             toastr()->info('Photos Deleted.');
