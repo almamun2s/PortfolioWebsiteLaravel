@@ -56,7 +56,7 @@ class ServiceController extends Controller
         ]);
 
         toastr()->success('Service Created Successfully.');
-        return redirect('dashboard/services');
+        return redirect()->route('admin.home.service');
     }
 
     /**
