@@ -3,6 +3,7 @@
 @section('title', $portfolio->title)
 
 @section('main_content')
+<style>.portfolio_details{font-size:1.5rem}@media (max-width:576px){.portfolio_details{font-size:1rem}}</style>
     <!-- Portfolio Section -->
     <section class="portfolio">
         <div class="container">
@@ -31,7 +32,7 @@
                 </div>
             </div>
             <div class="row wow animate__animated animate__fadeInUp mt-5">
-                <div class="col-md-12" style="font-size: 1.5rem;">
+                <div class="col-md-12 portfolio_details">
                     {!! $portfolio->details !!}
                 </div>
             </div>
